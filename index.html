@@ -939,12 +939,7 @@
 
       <div class="hero-cta">
         <a href="#projects" class="btn btn--accent">View Projects</a>
-        <a href="./Anik_Adnan_CV.pdf"
-           class="btn btn--ghost"
-           download="Anik_Adnan_CV.pdf"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Download CV (PDF)">Download CV</a>
+        <a href="./Anik_Adnan_CV.pdf" download="Anik_Adnan_CV.pdf" class="btn btn--ghost" aria-label="Download CV (PDF)">Download CV</a>
       </div>
 
       <div class="hero-socials">
@@ -984,7 +979,8 @@
       <p class="section-heading">About Me</p>
       <div class="about-grid reveal">
         <div class="about-photo">
-          <img src="./photo.jpeg" alt="Anik Adnan">
+          <!-- Replace this span with <img src="./photo.jpeg" alt="Anik Adnan"> once you upload your photo -->
+          <span>AA</span>
         </div>
         <div class="about-right">
           <p class="about-bio">
@@ -1559,7 +1555,7 @@
             </div>
             <button type="button" class="btn btn--accent" id="contactSubmit" style="align-self:flex-start;">Send Message</button>
             <div class="form-success" id="formSuccess" role="alert">
-              ✓ Thanks! I'll get back to you as soon as possible.
+              ✓ Your email client has opened with the message ready to send!
             </div>
           </div>
         </div>
@@ -1663,22 +1659,43 @@
     }
     typewriter();
 
-    /* ---- Contact form ---- */
+    /* ---- Contact form (mailto — opens email client with message pre-filled) ---- */
     document.getElementById('contactSubmit').addEventListener('click', () => {
       const name    = document.getElementById('contactName').value.trim();
       const email   = document.getElementById('contactEmail').value.trim();
       const message = document.getElementById('contactMessage').value.trim();
+
       if (!name || !email || !message) {
-        alert('Please fill in all fields before sending.');
+        ['contactName','contactEmail','contactMessage'].forEach(id => {
+          const el = document.getElementById(id);
+          if (!el.value.trim()) {
+            el.style.borderColor = '#f87171';
+            el.addEventListener('input', function fix() {
+              el.style.borderColor = '';
+              el.removeEventListener('input', fix);
+            });
+          }
+        });
         return;
       }
+
+      const recipient = 'anikadnanict17@gmail.com';
+      const subject   = encodeURIComponent('Portfolio Contact from ' + name);
+      const body      = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Reply-to: ' + email + '\n\n' +
+        'Message:\n' + message
+      );
+
+      window.location.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + body;
+
       document.getElementById('formSuccess').classList.add('visible');
       document.getElementById('contactName').value    = '';
       document.getElementById('contactEmail').value   = '';
       document.getElementById('contactMessage').value = '';
       setTimeout(() => {
         document.getElementById('formSuccess').classList.remove('visible');
-      }, 6000);
+      }, 8000);
     });
   </script>
 </body>
