@@ -1,1742 +1,1927 @@
-<!--
-  GITHUB PAGES DEPLOYMENT STEPS
-  ================================
-  1. Create a new GitHub repository named: anik-adnan (or your-username.github.io
-     for root domain)
-  2. Upload this index.html file to the repository root
-  3. Go to Settings → Pages → Source → select "Deploy from a branch"
-  4. Branch: main · Folder: / (root) → Save
-  5. Your site will be live at: https://Anik-Adnan.github.io/anik-adnan
-     (within 1–2 minutes)
-  6. To add your CV PDF: upload Anik_Adnan_CV.pdf to the repo root,
-     then update the "Download CV" button href to "./Anik_Adnan_CV.pdf"
-  7. To add your photo: upload photo.jpeg to the repo root,
-     then replace the initials placeholder with: <img src="./photo.jpeg" alt="Anik Adnan">
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Anik Adnan — AI/ML/NLP Researcher, University Instructor, MSc Student at MBSTU. Portfolio showcasing research, projects, and skills." />
-  <title>Anik Adnan — AI/ML/NLP Researcher & Instructor</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Anik Adnan — Academic Portfolio</title>
+<meta name="description" content="Academic portfolio of Anik Adnan — Instructor & AI/ML/NLP Researcher at MBSTU"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ============================================================
+   CSS RESET & VARIABLES
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --primary:#0A2540;
+  --accent:#1B4F8A;
+  --accent-light:#2563EB;
+  --subtle:#697684;
+  --bg:#F7F9FC;
+  --card:#FFFFFF;
+  --border:#E2E8F0;
+  --text:#1A2332;
+  --text-light:#4A5568;
+  --shadow:0 2px 14px rgba(10,37,64,.08);
+  --shadow-md:0 6px 24px rgba(10,37,64,.12);
+  --shadow-lg:0 12px 40px rgba(10,37,64,.16);
+  --radius:14px;
+  --radius-sm:8px;
+  --tr:0.28s ease;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:'Inter',sans-serif;cursor:pointer}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 
-  <style>
-    /* ============================================================
-       CSS CUSTOM PROPERTIES
-    ============================================================ */
-    :root {
-      --primary:  #0A2540;
-      --accent:   #1B4F8A;
-      --subtle:   #697484;
-      --bg:       #F4F6F9;
-      --white:    #FFFFFF;
-      --border:   #D8E0EA;
-      --shadow:   0 4px 20px rgba(10,37,64,0.10);
-      --shadow-hover: 0 10px 32px rgba(10,37,64,0.18);
-      --radius:   10px;
-      --transition: 0.3s ease;
-    }
+/* ============================================================
+   NAVBAR
+============================================================ */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow var(--tr);
+}
+#navbar.scrolled{box-shadow:var(--shadow)}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:58px;
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:var(--primary);font-size:1.05rem;
+  letter-spacing:-.01em;white-space:nowrap;
+}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:.1rem;list-style:none;align-items:center}
+.nav-links a{
+  color:var(--subtle);
+  padding:.35rem .55rem;
+  border-radius:6px;
+  font-size:.76rem;font-weight:500;
+  transition:color var(--tr),background var(--tr);
+  white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:rgba(27,79,138,.07)}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:8px;border:none;background:none;
+}
+.hamburger span{
+  width:22px;height:2px;background:var(--primary);
+  border-radius:2px;transition:var(--tr);display:block;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{
+  display:none;position:absolute;top:58px;left:0;right:0;
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:1rem 1.5rem;
+}
+.mobile-menu.open{display:block}
+.mobile-menu .nav-links{flex-direction:column;align-items:flex-start;gap:.15rem}
+.mobile-menu .nav-links a{font-size:.9rem;padding:.5rem .75rem;width:100%}
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================================
+   SECTIONS — SHARED
+============================================================ */
+section{padding:5.5rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:3rem}
+.sec-eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:.5rem;display:block;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.75rem,4vw,2.6rem);
+  font-weight:800;color:var(--primary);
+  margin-bottom:.75rem;line-height:1.2;
+}
+.sec-rule{
+  width:44px;height:3px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+  margin:0 auto;border-radius:2px;
+}
 
-    html { scroll-behavior: smooth; }
+/* fade-in animation */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+.fi-left{opacity:0;transform:translateX(-24px);transition:opacity .55s ease,transform .55s ease}
+.fi-left.vis{opacity:1;transform:translateX(0)}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--primary);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+/* ============================================================
+   HERO
+============================================================ */
+#hero{
+  min-height:100vh;padding-top:58px;
+  background:linear-gradient(150deg,#061929 0%,#0A2540 40%,#1B4F8A 100%);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;position:relative;overflow:hidden;
+}
+/* Ambient orbs */
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 60%,rgba(27,79,138,.45) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 30%,rgba(37,99,235,.25) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 30% at 50% 80%,rgba(10,37,64,.5) 0%,transparent 60%);
+  pointer-events:none;
+}
+/* Subtle grid overlay */
+#hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:820px;padding:2rem}
+.hero-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  padding:.3rem 1rem;font-size:.78rem;
+  color:rgba(255,255,255,.75);
+  letter-spacing:.08em;margin-bottom:1.5rem;
+}
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,7vw,5.2rem);
+  font-weight:800;color:#fff;
+  letter-spacing:-.03em;line-height:1;
+  margin-bottom:.85rem;
+}
+.hero-tw-wrap{
+  font-size:clamp(1rem,2.5vw,1.45rem);
+  color:rgba(255,255,255,.8);margin-bottom:.65rem;
+  min-height:2.2em;display:flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.tw-cursor{
+  border-right:2px solid rgba(255,255,255,.7);
+  animation:blink 1s step-end infinite;
+  padding-right:1px;
+}
+@keyframes blink{0%,100%{border-color:transparent}50%{border-color:rgba(255,255,255,.7)}}
+.hero-tagline{
+  font-size:.95rem;color:rgba(255,255,255,.5);
+  margin-bottom:2.5rem;letter-spacing:.06em;
+  font-style:italic;
+}
+.hero-cta{
+  display:flex;gap:1rem;justify-content:center;
+  flex-wrap:wrap;margin-bottom:2.5rem;
+}
+.btn-white{
+  background:#fff;color:var(--primary);
+  padding:.7rem 1.9rem;border-radius:40px;
+  font-weight:700;font-size:.88rem;
+  border:2px solid #fff;transition:var(--tr);
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-ghost{
+  background:transparent;color:#fff;
+  padding:.7rem 1.9rem;border-radius:40px;
+  font-weight:600;font-size:.88rem;
+  border:2px solid rgba(255,255,255,.4);transition:var(--tr);
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero-socials{display:flex;gap:.75rem;justify-content:center}
+.h-social{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:1rem;transition:var(--tr);
+}
+.h-social:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:rgba(255,255,255,.35);font-size:.72rem;letter-spacing:.08em;
+  animation:bounce 2.4s ease infinite;z-index:1;
+}
+.hero-scroll svg{width:18px;height:18px;opacity:.5}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 
-    a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
-    a:hover { color: var(--primary); }
+/* ============================================================
+   ABOUT
+============================================================ */
+#about{background:#fff}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:3.5rem;align-items:start}
+.about-bio p{
+  color:var(--text-light);font-size:1.03rem;
+  line-height:1.8;margin-bottom:1.1rem;
+}
+.about-bio p:last-child{margin-bottom:0}
+.about-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;color:var(--primary);
+  font-style:italic;margin-bottom:1.25rem;
+  padding-left:1rem;border-left:3px solid var(--accent);
+}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{
+  background:var(--bg);border-radius:var(--radius);
+  padding:1.5rem;text-align:center;
+  border-bottom:3px solid var(--accent);
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;font-weight:800;color:var(--primary);
+  line-height:1;margin-bottom:.3rem;
+}
+.stat-lbl{font-size:.78rem;color:var(--subtle);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 
-    img { max-width: 100%; display: block; }
+/* ============================================================
+   RESEARCH INTERESTS
+============================================================ */
+#interests{background:var(--bg)}
+.interests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.int-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:2rem 1.5rem;text-align:center;
+  box-shadow:var(--shadow);
+  border-top:3px solid var(--accent);
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.int-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.int-icon{font-size:2.4rem;margin-bottom:.85rem;display:block}
+.int-title{font-weight:700;color:var(--primary);font-size:.93rem;line-height:1.4}
 
-    ul { list-style: none; }
+/* ============================================================
+   PUBLICATIONS
+============================================================ */
+#publications{background:#fff}
+.pub-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.75rem;box-shadow:var(--shadow);
+  border-left:4px solid var(--accent);margin-bottom:1.5rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.pub-card:last-child{margin-bottom:0}
+.pub-card:hover{transform:translateX(4px);box-shadow:var(--shadow-md)}
+.pub-header{
+  display:flex;justify-content:space-between;
+  align-items:flex-start;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap;
+}
+.pub-status{
+  padding:.28rem .8rem;border-radius:20px;
+  font-size:.73rem;font-weight:700;white-space:nowrap;flex-shrink:0;
+}
+.s-review{background:#FEF9C3;color:#854D0E}
+.s-final{background:#DBEAFE;color:#1e40af}
+.pub-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.08rem;font-weight:700;color:var(--primary);
+  margin-bottom:.5rem;line-height:1.45;
+}
+.pub-journal{font-size:.88rem;color:var(--subtle);font-style:italic;margin-bottom:.5rem}
+.pub-authors{font-size:.84rem;color:var(--text-light)}
+.pub-role{
+  display:inline-block;
+  background:rgba(10,37,64,.07);color:var(--primary);
+  padding:.18rem .6rem;border-radius:4px;
+  font-size:.73rem;font-weight:700;margin-top:.6rem;
+}
 
-    /* ============================================================
-       TYPOGRAPHY
-    ============================================================ */
-    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+/* ============================================================
+   EDUCATION TIMELINE
+============================================================ */
+#education{background:var(--bg)}
+.timeline{position:relative;padding-left:2.25rem}
+.timeline::before{
+  content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--accent) 0%,rgba(27,79,138,.2) 100%);
+}
+.tl-item{
+  position:relative;padding-bottom:2rem;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.tl-item.vis{opacity:1;transform:translateX(0)}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:-28px;top:6px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;
+  box-shadow:0 0 0 2px var(--accent);
+  transition:transform var(--tr);
+}
+.tl-item:hover .tl-dot{transform:scale(1.2)}
+.tl-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.4rem 1.6rem;box-shadow:var(--shadow);
+  transition:box-shadow var(--tr);
+}
+.tl-card:hover{box-shadow:var(--shadow-md)}
+.tl-degree{
+  font-family:'Playfair Display',serif;
+  font-weight:700;color:var(--primary);
+  font-size:1.05rem;margin-bottom:.3rem;
+}
+.tl-inst{font-size:.87rem;color:var(--subtle);margin-bottom:.6rem}
+.tl-meta{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.tl-year{
+  background:rgba(27,79,138,.1);color:var(--accent);
+  padding:.2rem .65rem;border-radius:5px;
+  font-size:.78rem;font-weight:700;
+}
+.tl-result{font-size:.85rem;color:var(--text-light);font-weight:500}
+/* CGPA blur */
+.cgpa-blur{
+  filter:blur(4px);cursor:pointer;
+  transition:filter .4s ease;
+  display:inline-block;background:rgba(27,79,138,.08);
+  padding:.05rem .3rem;border-radius:3px;
+}
+.cgpa-blur.unblurred{filter:none}
+.lock-btn{
+  cursor:pointer;font-size:.9rem;margin-left:.3rem;
+  transition:var(--tr);background:none;border:none;
+  vertical-align:middle;line-height:1;
+}
+.lock-btn:hover{transform:scale(1.2)}
 
-    .section-heading {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--primary);
-      border-left: 3px solid var(--accent);
-      padding-left: 12px;
-      margin-bottom: 36px;
-    }
+/* ============================================================
+   EXPERIENCE
+============================================================ */
+#experience{background:#fff}
+.exp-card{
+  max-width:820px;margin:0 auto;
+  background:var(--card);border-radius:var(--radius);
+  padding:2rem 2.25rem;box-shadow:var(--shadow-md);
+  border-left:5px solid var(--accent);
+  transition:box-shadow var(--tr);
+}
+.exp-card:hover{box-shadow:var(--shadow-lg)}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem}
+.exp-role{
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem;font-weight:800;color:var(--primary);margin-bottom:.25rem;
+}
+.exp-org{font-size:1rem;color:var(--accent);font-weight:600;margin-bottom:.2rem}
+.exp-loc{font-size:.85rem;color:var(--subtle)}
+.badge-current{
+  background:#D1FAE5;color:#065F46;
+  padding:.3rem .85rem;border-radius:20px;
+  font-size:.75rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:.3rem;flex-shrink:0;
+}
+.exp-desc{color:var(--text-light);font-size:.95rem;line-height:1.75}
 
-    /* ============================================================
-       LAYOUT UTILITIES
-    ============================================================ */
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+/* ============================================================
+   PROJECTS
+============================================================ */
+#projects{background:var(--bg)}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.proj-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.75rem;box-shadow:var(--shadow);
+  border-top:4px solid var(--accent);
+  display:flex;flex-direction:column;gap:.8rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.proj-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.proj-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
+.proj-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:800;color:var(--primary);
+}
+.proj-year{
+  font-size:.78rem;color:var(--subtle);background:var(--bg);
+  padding:.2rem .5rem;border-radius:4px;white-space:nowrap;flex-shrink:0;font-weight:600;
+}
+.proj-sub{font-size:.88rem;color:var(--accent);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{
+  background:rgba(27,79,138,.08);color:var(--accent);
+  padding:.18rem .6rem;border-radius:4px;
+  font-size:.74rem;font-weight:600;
+}
+.proj-highlights{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.proj-highlights li{
+  font-size:.88rem;color:var(--text-light);
+  padding-left:1.2rem;position:relative;line-height:1.55;
+}
+.proj-highlights li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--accent);font-size:.8rem;top:.05em;
+}
+.proj-gh{
+  margin-top:auto;display:inline-flex;align-items:center;gap:.4rem;
+  color:var(--accent);font-size:.85rem;font-weight:700;
+  padding:.45rem .9rem;border:2px solid rgba(27,79,138,.2);
+  border-radius:8px;transition:var(--tr);align-self:flex-start;
+}
+.proj-gh:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-    .section {
-      padding: 88px 0;
-    }
+/* ============================================================
+   GITHUB (dark bg)
+============================================================ */
+#github{background:var(--primary);padding:5.5rem 1.5rem}
+#github .sec-eyebrow{color:rgba(255,255,255,.5)}
+#github .sec-title{color:#fff}
+#github .sec-rule{background:linear-gradient(90deg,rgba(255,255,255,.4),transparent)}
+.gh-token-notice{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:var(--radius-sm);
+  padding:.9rem 1.25rem;margin-bottom:1.75rem;
+  font-size:.83rem;color:rgba(255,255,255,.65);line-height:1.6;
+}
+.gh-token-notice code{
+  background:rgba(255,255,255,.12);
+  padding:.1rem .35rem;border-radius:3px;
+  font-family:monospace;color:rgba(255,255,255,.9);
+  font-size:.82rem;
+}
+.repos-sub-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;
+}
+.repos-sub-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;color:rgba(255,255,255,.9);font-weight:700;
+}
+.repo-count-badge{
+  background:rgba(255,255,255,.12);
+  color:rgba(255,255,255,.8);
+  padding:.28rem .75rem;border-radius:20px;
+  font-size:.78rem;font-weight:700;
+}
+.repos-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1rem;margin-bottom:1.25rem;
+}
+.repo-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:1.2rem;
+  display:flex;flex-direction:column;gap:.4rem;
+  transition:background var(--tr),transform var(--tr),border-color var(--tr);
+}
+.repo-card:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(255,255,255,.2);
+  transform:translateY(-2px);
+}
+.repo-name{
+  font-weight:700;font-size:.93rem;color:#fff;
+  transition:text-decoration var(--tr);
+}
+.repo-name:hover{text-decoration:underline}
+.repo-desc{
+  font-size:.8rem;color:rgba(255,255,255,.6);
+  line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;
+  flex-grow:1;
+}
+.repo-lang{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.78rem;color:rgba(255,255,255,.65);
+}
+.lang-dot{width:10px;height:10px;border-radius:50%;background:#ccc;flex-shrink:0}
+.repo-stats{
+  display:flex;gap:.9rem;
+  font-size:.78rem;color:rgba(255,255,255,.55);
+}
+.repo-topics{display:flex;flex-wrap:wrap;gap:.3rem}
+.repo-topic{
+  background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);
+  padding:.14rem .5rem;border-radius:10px;font-size:.7rem;
+}
+.repo-updated{font-size:.72rem;color:rgba(255,255,255,.38)}
+.repo-link-btn{
+  display:inline-flex;align-items:center;gap:.3rem;
+  color:rgba(255,255,255,.75);font-size:.78rem;font-weight:600;
+  margin-top:.2rem;transition:color var(--tr);
+}
+.repo-link-btn:hover{color:#fff}
+/* Skeleton */
+.skel{background:rgba(255,255,255,.08);border-radius:4px;animation:sk 1.5s ease infinite}
+@keyframes sk{0%,100%{opacity:1}50%{opacity:.4}}
+.gh-notice{
+  background:rgba(255,193,7,.12);
+  border:1px solid rgba(255,193,7,.25);
+  border-radius:8px;padding:.7rem 1rem;
+  font-size:.83rem;color:rgba(255,255,255,.75);
+  margin-bottom:1.25rem;display:none;
+}
+.load-more-btn{
+  display:block;margin:1rem auto 0;
+  padding:.65rem 2rem;
+  background:transparent;
+  border:2px solid rgba(255,255,255,.25);
+  border-radius:25px;color:rgba(255,255,255,.75);
+  font-size:.88rem;font-weight:600;
+  transition:var(--tr);
+}
+.load-more-btn:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.load-more-btn:disabled{opacity:.45;cursor:not-allowed}
+.all-repos-grid{
+  display:none;grid-template-columns:repeat(3,1fr);
+  gap:1rem;margin-bottom:1.25rem;
+}
 
-    .section--alt {
-      background: var(--white);
-    }
+/* ============================================================
+   TRYHACKME
+============================================================ */
+#tryhackme{background:var(--bg)}
+.thm-header{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.75rem;margin-bottom:2.5rem;
+}
+.thm-rank-badge{
+  background:linear-gradient(135deg,var(--accent),var(--accent-light));
+  color:#fff;padding:.3rem .85rem;border-radius:20px;
+  font-size:.78rem;font-weight:700;
+}
+.thm-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;margin-bottom:2.5rem;
+}
+.thm-stat-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.5rem;text-align:center;box-shadow:var(--shadow);
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.thm-stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.thm-stat-icon{font-size:1.7rem;margin-bottom:.5rem}
+.thm-stat-val{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:800;color:var(--primary);
+}
+.thm-stat-lbl{font-size:.78rem;color:var(--subtle);margin-top:.2rem;font-weight:600}
+.thm-sub-head{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;color:var(--primary);
+  margin-bottom:1.1rem;
+}
+.thm-badges-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;margin-bottom:2rem;
+}
+.thm-badge-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.2rem;text-align:center;box-shadow:var(--shadow);
+  transition:transform var(--tr),box-shadow var(--tr);
+}
+.thm-badge-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 22px rgba(27,79,138,.22),var(--shadow-md);
+}
+.thm-badge-img{width:64px;height:64px;object-fit:contain;margin:0 auto .6rem}
+.thm-badge-name{font-weight:700;color:var(--primary);font-size:.84rem;margin-bottom:.2rem}
+.thm-badge-date{font-size:.75rem;color:var(--subtle)}
+.thm-rooms-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  margin-bottom:1rem;
+}
+.room-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.15rem;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:.45rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+  text-decoration:none;
+}
+.room-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.room-name{font-weight:700;color:var(--primary);font-size:.88rem;line-height:1.35}
+.diff-pill{
+  display:inline-block;padding:.18rem .55rem;
+  border-radius:10px;font-size:.73rem;font-weight:700;align-self:flex-start;
+}
+.diff-easy{background:#D1FAE5;color:#065F46}
+.diff-medium{background:#FEF3C7;color:#92400E}
+.diff-hard{background:#FEE2E2;color:#991B1B}
+.diff-info{background:#E0E7FF;color:#3730A3}
+.room-cat{font-size:.77rem;color:var(--subtle)}
+.rooms-hidden{display:none}
+.load-rooms-btn{
+  display:none;margin:0 auto;
+  padding:.6rem 1.75rem;
+  background:transparent;
+  border:2px solid rgba(27,79,138,.25);
+  border-radius:25px;color:var(--accent);
+  font-size:.86rem;font-weight:700;
+  transition:var(--tr);
+}
+.load-rooms-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.thm-fallback{
+  background:var(--card);border-radius:var(--radius);
+  padding:2rem;text-align:center;
+  box-shadow:var(--shadow);display:none;
+}
+.thm-fallback img{margin:0 auto 1rem;max-width:320px}
+.thm-fallback p{font-size:.88rem;color:var(--subtle)}
+.thm-fallback a{color:var(--accent);font-weight:600}
 
-    /* ============================================================
-       SCROLL REVEAL
-    ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* ============================================================
+   SKILLS
+============================================================ */
+#skills{background:#fff}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.skill-cat{
+  background:var(--bg);border-radius:var(--radius);
+  padding:1.2rem;box-shadow:var(--shadow);
+  transition:box-shadow var(--tr);
+}
+.skill-cat:hover{box-shadow:var(--shadow-md)}
+.skill-cat-title{
+  font-size:.74rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--primary);margin-bottom:.8rem;
+  padding-bottom:.5rem;border-bottom:2px solid var(--border);
+}
+.pill-wrap{display:flex;flex-wrap:wrap;gap:.35rem}
+.pill{
+  background:rgba(27,79,138,.08);color:var(--accent);
+  padding:.2rem .6rem;border-radius:20px;
+  font-size:.76rem;font-weight:600;
+}
+a.pill{transition:var(--tr)}
+a.pill:hover{background:var(--accent);color:#fff}
 
-    /* ============================================================
-       PILL TAGS
-    ============================================================ */
-    .tag {
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      line-height: 1.8;
-    }
-    .tag--navy  { background: var(--primary); color: var(--white); }
-    .tag--accent { background: var(--accent); color: var(--white); }
-    .tag--amber { background: #B45309; color: var(--white); }
-    .tag--green { background: #15803D; color: var(--white); }
-    .tag--outline { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+/* ============================================================
+   CERTIFICATIONS
+============================================================ */
+#certifications{background:var(--bg)}
+.cert-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center}
+.cert-tab{
+  padding:.5rem 1.3rem;border-radius:25px;
+  border:2px solid var(--border);
+  background:none;font-size:.83rem;font-weight:700;
+  color:var(--subtle);transition:var(--tr);
+}
+.cert-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.cert-tab:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.cert-panel{display:none;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+.cert-panel.active{display:grid}
+.cert-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.25rem;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:.45rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+  text-decoration:none;
+  border-top:3px solid var(--accent);
+}
+.cert-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.cert-badge{
+  width:34px;height:34px;border-radius:8px;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:800;color:#fff;letter-spacing:.02em;
+  margin-bottom:.2rem;
+}
+.cert-name{font-weight:700;color:var(--primary);font-size:.88rem;line-height:1.4}
+.cert-issuer{font-size:.78rem;color:var(--accent);font-weight:600}
+.cert-date{font-size:.75rem;color:var(--subtle);font-weight:600}
+.cert-desc{font-size:.78rem;color:var(--text-light);line-height:1.5}
 
-    /* ============================================================
-       CARDS
-    ============================================================ */
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 28px 24px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
+/* ============================================================
+   LEADERSHIP
+============================================================ */
+#leadership{background:#fff}
+.lead-timeline{position:relative;padding-left:2.25rem}
+.lead-timeline::before{
+  content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,#1B4F8A,rgba(27,79,138,.15));
+}
+.lead-item{
+  position:relative;padding-bottom:2rem;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.lead-item.vis{opacity:1;transform:translateX(0)}
+.lead-item:last-child{padding-bottom:0}
+.lead-dot{
+  position:absolute;left:-28px;top:6px;
+  width:16px;height:16px;border-radius:50%;
+  background:#1B4F8A;border:3px solid #fff;
+  box-shadow:0 0 0 2px #1B4F8A;
+  transition:transform var(--tr);
+}
+.lead-item:hover .lead-dot{transform:scale(1.2)}
+.lead-card{
+  background:var(--bg);border-radius:var(--radius);
+  padding:1.3rem 1.5rem;
+  transition:box-shadow var(--tr);
+}
+.lead-card:hover{box-shadow:var(--shadow-md)}
+.lead-role{
+  font-family:'Playfair Display',serif;
+  font-weight:700;color:var(--primary);font-size:1.02rem;margin-bottom:.25rem;
+}
+.lead-org{font-size:.88rem;color:var(--accent);font-weight:600;margin-bottom:.4rem}
+.lead-meta{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem}
+.lead-year{
+  background:rgba(27,79,138,.1);color:var(--accent);
+  padding:.2rem .65rem;border-radius:5px;
+  font-size:.76rem;font-weight:700;
+}
+.lead-desc{font-size:.87rem;color:var(--text-light);line-height:1.65}
 
-    /* ============================================================
-       BUTTONS
-    ============================================================ */
-    .btn {
-      display: inline-block;
-      padding: 11px 28px;
-      border-radius: 999px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
-      border: 2px solid transparent;
-    }
-    .btn--accent { background: var(--accent); color: var(--white); }
-    .btn--accent:hover { background: #153f6e; color: var(--white); transform: translateY(-2px); }
-    .btn--ghost { background: transparent; color: var(--white); border-color: var(--white); }
-    .btn--ghost:hover { background: var(--white); color: var(--primary); transform: translateY(-2px); }
-    .btn--outline { background: transparent; color: var(--accent); border-color: var(--accent); }
-    .btn--outline:hover { background: var(--accent); color: var(--white); }
+/* ============================================================
+   CONTACT
+============================================================ */
+#contact{background:var(--bg)}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1rem;max-width:680px;margin:0 auto 1.5rem;
+}
+.contact-card{
+  background:var(--card);border-radius:var(--radius);
+  padding:1.3rem 1.4rem;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:1rem;
+  transition:transform var(--tr),box-shadow var(--tr);
+  text-decoration:none;
+}
+.contact-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.c-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(27,79,138,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.c-lbl{font-size:.72rem;color:var(--subtle);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.15rem}
+.c-val{font-weight:700;color:var(--primary);font-size:.88rem;line-height:1.3}
+.contact-addr{
+  max-width:680px;margin:0 auto 1.5rem;
+  background:var(--card);border-radius:var(--radius);
+  padding:1.2rem 1.4rem;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:1rem;
+}
+.ref-note{
+  max-width:680px;margin:0 auto;
+  background:var(--card);border-radius:var(--radius);
+  padding:1.3rem 1.6rem;box-shadow:var(--shadow);
+  border-left:4px solid var(--accent);
+  font-size:.88rem;color:var(--text-light);line-height:1.7;
+  text-align:center;
+}
+.ref-note strong{color:var(--primary)}
 
-    /* ============================================================
-       1. NAVBAR
-    ============================================================ */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: transparent;
-      transition: background var(--transition), box-shadow var(--transition);
-      padding: 18px 0;
-    }
-    #navbar.scrolled {
-      background: var(--primary);
-      box-shadow: 0 2px 20px rgba(10,37,64,0.25);
-      padding: 12px 0;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.01em;
-    }
-    .nav-logo:hover { color: #a8c4e8; }
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.83rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      position: relative;
-      padding-bottom: 3px;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: #a8c4e8;
-      transition: width var(--transition);
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{
+  background:var(--primary);color:rgba(255,255,255,.55);
+  padding:2.25rem 1.5rem;text-align:center;
+}
+.foot-socials{display:flex;gap:.75rem;justify-content:center;margin-bottom:1.1rem}
+.foot-soc{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.6);font-size:.95rem;transition:var(--tr);
+  text-decoration:none;
+}
+.foot-soc:hover{background:rgba(255,255,255,.18);color:#fff}
+.foot-txt{font-size:.82rem}
+.foot-txt a{color:rgba(255,255,255,.7);font-weight:600}
+.foot-txt a:hover{color:#fff}
 
-    /* Hamburger */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: transform var(--transition), opacity var(--transition);
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    /* Mobile menu */
-    .nav-mobile {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      background: var(--primary);
-      position: absolute;
-      top: 100%; left: 0; right: 0;
-      padding: 12px 0 20px;
-      box-shadow: 0 8px 24px rgba(10,37,64,0.25);
-    }
-    .nav-mobile.open { display: flex; }
-    .nav-mobile a {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 12px 24px;
-      transition: background var(--transition), color var(--transition);
-    }
-    .nav-mobile a:hover, .nav-mobile a.active { background: rgba(255,255,255,0.08); color: var(--white); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-    }
-
-    /* ============================================================
-       2. HERO
-    ============================================================ */
-    #hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0A2540 0%, #1B4F8A 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-    }
-    .hero-content { max-width: 760px; }
-
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 8vw, 68px);
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: 0.04em;
-      line-height: 1.05;
-      margin-bottom: 20px;
-    }
-
-    .hero-typewriter {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      font-weight: 500;
-      color: #a8c4e8;
-      min-height: 2em;
-      margin-bottom: 22px;
-      letter-spacing: 0.02em;
-    }
-    .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background: #a8c4e8;
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink 0.75s step-end infinite;
-    }
-    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-
-    .hero-bio {
-      color: rgba(255,255,255,0.72);
-      font-size: 1rem;
-      font-style: italic;
-      margin-bottom: 38px;
-      line-height: 1.6;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .hero-socials {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 56px;
-    }
-    .hero-socials a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.35);
-      color: var(--white);
-      transition: background var(--transition), border-color var(--transition), transform var(--transition);
-    }
-    .hero-socials a:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.65);
-      transform: translateY(-3px);
-      color: var(--white);
-    }
-    .hero-socials svg { width: 20px; height: 20px; fill: currentColor; }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s ease-in-out infinite;
-      color: rgba(255,255,255,0.55);
-    }
-    .hero-scroll svg { width: 28px; height: 28px; stroke: currentColor; fill: none; }
-    @keyframes bounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(8px); }
-    }
-
-    /* ============================================================
-       3. ABOUT
-    ============================================================ */
-    #about {}
-    .about-grid {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 56px;
-      align-items: start;
-    }
-    @media (max-width: 700px) {
-      .about-grid { grid-template-columns: 1fr; gap: 36px; }
-      .about-photo { margin: 0 auto; }
-    }
-
-    .about-photo {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 4px solid var(--accent);
-      background: var(--primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .about-photo span {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.05em;
-    }
-    .about-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    .about-bio {
-      font-size: 1rem;
-      color: #3a4a5e;
-      line-height: 1.8;
-      margin-bottom: 32px;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    @media (max-width: 580px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
-
-    .stat-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 14px 18px;
-      text-align: center;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .stat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--subtle);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* ============================================================
-       4. EDUCATION TIMELINE
-    ============================================================ */
-    .timeline {
-      position: relative;
-      padding-left: 36px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px; top: 8px; bottom: 8px;
-      width: 2px;
-      background: var(--border);
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 36px;
-    }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-dot {
-      position: absolute;
-      left: -32px;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 3px solid var(--white);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .timeline-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 24px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .timeline-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-    .timeline-degree {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-    .timeline-school {
-      font-size: 0.88rem;
-      color: var(--accent);
-      font-style: italic;
-      margin-bottom: 6px;
-    }
-    .timeline-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-    .timeline-year {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--subtle);
-      background: var(--bg);
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-    .timeline-gpa {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--white);
-      background: var(--accent);
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-    .blur-text {
-      filter: blur(4px);
-    }
-    .timeline-ongoing {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #15803D;
-      background: #DCFCE7;
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-
-    /* ============================================================
-       5. RESEARCH
-    ============================================================ */
-    .research-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-    @media (max-width: 700px) { .research-grid { grid-template-columns: 1fr; } }
-
-    .research-card .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .research-card .paper-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    .research-card .paper-journal {
-      font-size: 0.82rem;
-      color: var(--accent);
-      font-style: italic;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    .research-card .paper-desc {
-      font-size: 0.88rem;
-      color: var(--subtle);
-      line-height: 1.65;
-    }
-
-    .interests-heading {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 16px;
-    }
-    .interests-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    /* ============================================================
-       6. PROJECTS
-    ============================================================ */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    @media (max-width: 700px) { .projects-grid { grid-template-columns: 1fr; } }
-
-    .project-card .project-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .project-card .project-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.02rem;
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.35;
-    }
-    .project-year {
-      font-size: 0.75rem;
-      font-weight: 700;
-      background: var(--bg);
-      color: var(--subtle);
-      padding: 3px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 14px;
-    }
-    .project-bullets {
-      list-style: disc;
-      padding-left: 18px;
-      font-size: 0.86rem;
-      color: #3a4a5e;
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-    .project-bullets li + li { margin-top: 6px; }
-    .project-link { font-size: 0.83rem; }
-
-    /* ============================================================
-       7. SKILLS
-    ============================================================ */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
-
-    .skill-card .skill-category {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--primary);
-      margin-bottom: 12px;
-      border-left: 3px solid var(--accent);
-      padding-left: 10px;
-    }
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
-    .skill-tag {
-      display: inline-block;
-      background: var(--bg);
-      color: var(--primary);
-      border: 1.5px solid var(--border);
-      border-radius: 999px;
-      padding: 3px 11px;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    /* ============================================================
-       8. CERTIFICATIONS
-    ============================================================ */
-    .cert-group { margin-bottom: 36px; }
-    .cert-group:last-child { margin-bottom: 0; }
-    .cert-group-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-    .cert-group-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .cert-list { display: flex; flex-direction: column; gap: 10px; }
-    .cert-item {
-      background: var(--white);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 14px 18px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .cert-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-    .cert-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-    .cert-name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 2px;
-    }
-    .cert-meta {
-      font-size: 0.78rem;
-      color: var(--subtle);
-    }
-
-    /* ============================================================
-       9. LEADERSHIP
-    ============================================================ */
-    .leadership-list { display: flex; flex-direction: column; gap: 16px; }
-    .leadership-item {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 18px;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .leadership-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-    .leadership-icon {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 2px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .leadership-role {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--primary);
-      margin-bottom: 3px;
-    }
-    .leadership-org {
-      font-size: 0.85rem;
-      color: var(--accent);
-      font-style: italic;
-      margin-bottom: 4px;
-    }
-    .leadership-date {
-      font-size: 0.76rem;
-      color: var(--subtle);
-      font-weight: 600;
-      background: var(--bg);
-      display: inline-block;
-      padding: 1px 10px;
-      border-radius: 999px;
-    }
-
-    /* ============================================================
-       10. CONTACT
-    ============================================================ */
-    #contact {
-      background: var(--primary);
-      color: var(--white);
-      padding: 88px 0;
-    }
-    #contact .section-heading { color: var(--white); border-left-color: #a8c4e8; }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-    }
-    @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
-
-    .contact-detail-list { display: flex; flex-direction: column; gap: 18px; }
-    .contact-detail {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .contact-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.25);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-icon svg { width: 18px; height: 18px; stroke: #a8c4e8; fill: none; }
-    .contact-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #a8c4e8;
-      margin-bottom: 2px;
-    }
-    .contact-value {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.88);
-    }
-    .contact-value a { color: rgba(255,255,255,0.88); }
-    .contact-value a:hover { color: var(--white); }
-
-    /* Contact Form */
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 0.76rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #a8c4e8;
-      margin-bottom: 6px;
-    }
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.07);
-      border: 1.5px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color var(--transition), background var(--transition);
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.35); }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #a8c4e8;
-      background: rgba(255,255,255,0.10);
-    }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-success {
-      display: none;
-      background: rgba(21,128,61,0.25);
-      border: 1px solid #4ade80;
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-size: 0.88rem;
-      color: #4ade80;
-      text-align: center;
-    }
-    .form-success.visible { display: block; }
-
-    /* ============================================================
-       11. FOOTER
-    ============================================================ */
-    footer {
-      background: var(--primary);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 22px 24px;
-      text-align: center;
-      color: var(--subtle);
-      font-size: 0.82rem;
-    }
-    footer span { color: rgba(255,255,255,0.45); }
-
-    /* ============================================================
-       RESPONSIVE TWEAKS
-    ============================================================ */
-    @media (max-width: 768px) {
-      .section { padding: 64px 0; }
-      .hero-name { font-size: 2.8rem; }
-    }
-    @media (max-width: 480px) {
-      .hero-name { font-size: 2.2rem; }
-      .hero-cta { flex-direction: column; align-items: center; }
-    }
-  </style>
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media(max-width:960px){
+  .hamburger{display:flex}
+  .nav-links{display:none}
+  .interests-grid{grid-template-columns:repeat(2,1fr)}
+  .repos-grid,.all-repos-grid{grid-template-columns:repeat(2,1fr)}
+  .thm-stats{grid-template-columns:repeat(2,1fr)}
+  .thm-badges-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  section{padding:4rem 1rem}
+  .about-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .repos-grid,.all-repos-grid{grid-template-columns:1fr}
+  .thm-rooms-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .interests-grid{grid-template-columns:1fr 1fr}
+  .thm-stats{grid-template-columns:1fr 1fr}
+  .thm-badges-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .skills-grid{grid-template-columns:1fr}
+  .cert-tabs{flex-direction:column;align-items:stretch}
+  .cert-tab{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="container nav-inner">
-      <a href="#hero" class="nav-logo">Anik Adnan</a>
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Anik <span>Adnan</span></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links-desktop">
+      <li><a href="#about">About</a></li>
+      <li><a href="#interests">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#tryhackme">TryHackMe</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#interests">Research Interests</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#tryhackme">TryHackMe</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-      <ul class="nav-links" role="list">
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-
-      <button class="nav-hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">ICT · AI · NLP · Cybersecurity</div>
+    <h1 class="hero-name">ANIK ADNAN</h1>
+    <div class="hero-tw-wrap">
+      <span id="typewriter" class="tw-cursor"></span>
     </div>
-
-    <div class="nav-mobile" id="mobileMenu" role="list">
-      <a href="#about"        class="mobile-link">About</a>
-      <a href="#education"   class="mobile-link">Education</a>
-      <a href="#research"    class="mobile-link">Research</a>
-      <a href="#projects"    class="mobile-link">Projects</a>
-      <a href="#skills"      class="mobile-link">Skills</a>
-      <a href="#certifications" class="mobile-link">Certifications</a>
-      <a href="#leadership"  class="mobile-link">Leadership</a>
-      <a href="#contact"     class="mobile-link">Contact</a>
+    <p class="hero-tagline">Bridging Research, Technology &amp; Education</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-white">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+      <a href="#publications" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        View Research
+      </a>
     </div>
-  </nav>
+    <div class="hero-socials">
+      <a href="mailto:anikadnanict17@gmail.com" class="h-social" title="Email">✉</a>
+      <a href="https://linkedin.com/in/anikadnan9" target="_blank" class="h-social" title="LinkedIn">in</a>
+      <a href="https://github.com/Anik-Adnan" target="_blank" class="h-social" title="GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      </a>
+      <a href="https://anik-adnan.github.io/" target="_blank" class="h-social" title="Portfolio">🌐</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    <span>SCROLL</span>
+  </div>
+</section>
 
-  <!-- ============================================================
-       HERO
-  ============================================================ -->
-  <section id="hero" aria-label="Introduction">
-    <div class="hero-content">
-      <h1 class="hero-name">ANIK ADNAN</h1>
-
-      <div class="hero-typewriter">
-        <span id="typewriter-text"></span><span class="cursor" aria-hidden="true"></span>
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Who I Am</span>
+      <h2 class="sec-title">About Me</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-bio fi-left">
+        <p class="about-tagline">"Committed to research-led teaching, student mentorship, and interdisciplinary academic development."</p>
+        <p>Anik Adnan is a B.Sc. (Engineering) graduate in Information &amp; Communication Technology from Mawlana Bhashani Science and Technology University (MBSTU) and is currently pursuing his MSc at the same institution. He serves as an <strong>Instructor in ICT &amp; Vocational Training</strong> at Bamundi Karigori Training Center, Gangni, Meherpur, where he delivers structured instruction and hands-on laboratory sessions while mentoring students toward professional readiness.</p>
+        <p>His research interests span <strong>Artificial Intelligence, Machine Learning, Natural Language Processing, Computer Vision, Cybersecurity, and Bio-Informatics</strong>, with published work in international journals. As <strong>Vice Chair of the IEEE MBSTU Student Branch</strong>, he leads technical workshops and research seminars that cultivate the next generation of engineers.</p>
+        <p>Anik is actively seeking a University Lecturer or Research position where he can contribute to research-led teaching and interdisciplinary academic advancement, bridging the gap between emerging AI technology and practical, impactful education.</p>
       </div>
+      <div class="stats-grid fi">
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-lbl">Research Publications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">7+</div>
+          <div class="stat-lbl">Certifications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5+</div>
+          <div class="stat-lbl">Leadership Roles</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2+</div>
+          <div class="stat-lbl">Years Teaching</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <p class="hero-bio">
-        Building intelligent systems. Teaching the next generation. Researching what comes next.
+<!-- ============================================================
+     RESEARCH INTERESTS
+============================================================ -->
+<section id="interests">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Areas of Focus</span>
+      <h2 class="sec-title">Research Interests</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="interests-grid">
+      <div class="int-card fi">
+        <span class="int-icon">🤖</span>
+        <div class="int-title">Artificial Intelligence</div>
+      </div>
+      <div class="int-card fi">
+        <span class="int-icon">🧠</span>
+        <div class="int-title">Machine Learning &amp; Deep Learning</div>
+      </div>
+      <div class="int-card fi">
+        <span class="int-icon">💬</span>
+        <div class="int-title">Natural Language Processing (NLP)</div>
+      </div>
+      <div class="int-card fi">
+        <span class="int-icon">🖼️</span>
+        <div class="int-title">Digital Image Processing &amp; Computer Vision</div>
+      </div>
+      <div class="int-card fi">
+        <span class="int-icon">🔐</span>
+        <div class="int-title">Cybersecurity &amp; Threat Intelligence</div>
+      </div>
+      <div class="int-card fi">
+        <span class="int-icon">🧬</span>
+        <div class="int-title">Bio-Informatics / Nanomaterials</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PUBLICATIONS
+============================================================ -->
+<section id="publications">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Scholarly Work</span>
+      <h2 class="sec-title">Research Publications</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="pub-card fi">
+      <div class="pub-header">
+        <div>
+          <h3 class="pub-title">Multi-Scale Insect Classification Using Attention-Enhanced Ensembles for Sustainable Pest Management</h3>
+          <p class="pub-journal">IAES International Journal of Artificial Intelligence (IJ-AI)</p>
+          <p class="pub-authors"><strong>Anik Adnan</strong>, et al.</p>
+          <span class="pub-role">Lead Author</span>
+        </div>
+        <span class="pub-status s-review">🟡 Under Review</span>
+      </div>
+    </div>
+    <div class="pub-card fi">
+      <div class="pub-header">
+        <div>
+          <h3 class="pub-title">Computational Insights into Coronene and Doped Nanostructures as Anticancer Drug Carriers (DFT &amp; Molecular Docking Analysis)</h3>
+          <p class="pub-journal">Manuscript Finalized — Prepared for Journal Submission</p>
+          <p class="pub-authors">Safayat Hossain, <strong>Anik Adnan</strong>, et al.</p>
+          <span class="pub-role">2nd Author</span>
+        </div>
+        <span class="pub-status s-final">🔵 Manuscript Finalized</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EDUCATION
+============================================================ -->
+<section id="education">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Academic Background</span>
+      <h2 class="sec-title">Education</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-degree">MSc in Information &amp; Communication Technology <em style="font-size:.85rem;color:var(--accent)">(Ongoing)</em></div>
+          <div class="tl-inst">Mawlana Bhashani Science and Technology University (MBSTU), Santosh, Tangail-1902</div>
+          <div class="tl-meta">
+            <span class="tl-year">2025 – Present</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-degree">B.Sc. (Engineering) in Information &amp; Communication Technology</div>
+          <div class="tl-inst">Mawlana Bhashani Science and Technology University (MBSTU), Santosh, Tangail-1902</div>
+          <div class="tl-meta">
+            <span class="tl-year">2019 – 2023 (Passed 2025)</span>
+            <span class="tl-result">
+              CGPA: <span class="cgpa-blur" id="cgpa-blur">3.71 / 4.00</span>
+              <button class="lock-btn" id="cgpa-lock" onclick="revealCGPA()" title="Click to reveal">🔒</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-degree">Higher Secondary Certificate (HSC)</div>
+          <div class="tl-inst">Bamandi Nishipur Higher Secondary School, Jessore Board</div>
+          <div class="tl-meta">
+            <span class="tl-year">2018</span>
+            <span class="tl-result">GPA: 4.92 / 5.00</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-degree">Secondary School Certificate (SSC)</div>
+          <div class="tl-inst">Gangni Secondary School and College, Meherpur, Jessore Board</div>
+          <div class="tl-meta">
+            <span class="tl-year">2016</span>
+            <span class="tl-result">GPA: 5.00 / 5.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+============================================================ -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Professional History</span>
+      <h2 class="sec-title">Work Experience</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="exp-card fi">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Instructor — ICT &amp; Vocational Training</div>
+          <div class="exp-org">Bamundi Karigori Training Center</div>
+          <div class="exp-loc">📍 Gangni, Meherpur</div>
+        </div>
+        <span class="badge-current">
+          <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#10B981"/></svg>
+          March 2025 – Present
+        </span>
+      </div>
+      <p class="exp-desc">Delivered structured ICT instruction and hands-on laboratory sessions in Microsoft Word, Excel, PowerPoint, and Python programming, while providing academic mentoring to improve student engagement and job readiness. Developed curriculum materials tailored to vocational learners and maintained a practical, student-centred approach to technical education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+============================================================ -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Built Things</span>
+      <h2 class="sec-title">Key Projects</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="proj-grid">
+      <!-- Project 1 -->
+      <div class="proj-card fi">
+        <div class="proj-head">
+          <h3 class="proj-title">Biswas Shopping</h3>
+          <span class="proj-year">2023</span>
+        </div>
+        <div class="proj-sub">Full-Stack E-Commerce Mobile &amp; Web Application</div>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Firestore</span>
+          <span class="tag">FCM</span>
+          <span class="tag">Auth</span>
+          <span class="tag">GetX</span>
+          <span class="tag">Android</span>
+          <span class="tag">iOS</span>
+          <span class="tag">Web</span>
+        </div>
+        <ul class="proj-highlights">
+          <li>Architected a cross-platform (Android / iOS / Web) e-commerce solution using Flutter and Firebase with GetX state management.</li>
+          <li>Implemented real-time product catalogue, shopping cart, and push notifications.</li>
+          <li>Secure user authentication with seamless cloud synchronisation via Firestore.</li>
+        </ul>
+        <a href="https://github.com/Anik-Adnan/BiswasShoppingBD" target="_blank" class="proj-gh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View on GitHub →
+        </a>
+      </div>
+      <!-- Project 2 -->
+      <div class="proj-card fi">
+        <div class="proj-head">
+          <h3 class="proj-title">SafetyInsurance</h3>
+          <span class="proj-year">Aug 2023</span>
+        </div>
+        <div class="proj-sub">Emergency Android Application</div>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">XML</span>
+          <span class="tag">Android Studio</span>
+          <span class="tag">GPS</span>
+        </div>
+        <ul class="proj-highlights">
+          <li>Built a safety-critical Android app enabling automatic and manual emergency SMS dispatch triggered via hardware volume-button press.</li>
+          <li>Integrated GPS-based live location sharing to up to four pre-configured emergency contacts.</li>
+          <li>Developed natively in Java, XML, and Android Studio for reliable, low-latency response.</li>
+        </ul>
+        <a href="https://github.com/Anik-Adnan/SafTy-Insurance-Mobile-Application-Using-JAVA" target="_blank" class="proj-gh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View on GitHub →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GITHUB REPOSITORIES (7B)
+============================================================ -->
+<section id="github">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Open Source</span>
+      <h2 class="sec-title">GitHub Repositories</h2>
+      <div class="sec-rule"></div>
+    </div>
+
+    <div class="gh-token-notice">
+      <strong>🔑 Developer Note:</strong> Pinned repos use the GitHub GraphQL API and require a Personal Access Token.
+      Set <code>GITHUB_TOKEN</code> at the top of the &lt;script&gt; block to your GitHub PAT
+      (Settings → Developer settings → Tokens (classic) → scope: <code>public_repo</code> only).
+      Without a token, the top repos by stars are shown automatically as fallback.
+    </div>
+
+    <!-- Pinned repos -->
+    <div class="repos-sub-head">
+      <div class="repos-sub-title">⭐ Pinned Repositories</div>
+      <span class="repo-count-badge" id="repo-count-badge">Loading…</span>
+    </div>
+    <div id="pinned-fallback-notice" class="gh-notice">
+      ⚠ Pinned repos unavailable — showing top repos by stars.
+    </div>
+    <div class="repos-grid" id="pinned-repos-grid"></div>
+
+    <!-- All repos -->
+    <div class="repos-sub-head" style="margin-top:2rem">
+      <div class="repos-sub-title">📂 All Repositories</div>
+    </div>
+    <div class="all-repos-grid" id="all-repos-grid"></div>
+    <button class="load-more-btn" id="load-more-btn" onclick="loadMoreRepos()">
+      Load More Repositories ↓
+    </button>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRYHACKME JOURNEY (7C)
+============================================================ -->
+<section id="tryhackme">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Hands-on Cybersecurity</span>
+      <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap">
+        <h2 class="sec-title" style="margin-bottom:0">TryHackMe Journey</h2>
+        <span class="thm-rank-badge" id="thm-rank-badge">🏆 Top 20%</span>
+      </div>
+      <div class="sec-rule" style="margin-top:.75rem"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="thm-stats" id="thm-stats">
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">⌛</div><div class="thm-stat-val" style="font-size:1.1rem">Loading…</div><div class="thm-stat-lbl">Stats</div></div>
+    </div>
+
+    <!-- Fallback badge image -->
+    <div class="thm-fallback" id="thm-fallback">
+      <img src="https://tryhackme-badges.s3.amazonaws.com/AnikAdnan28.png" alt="TryHackMe Badge for AnikAdnan28"/>
+      <p>Live stats unavailable due to CORS restrictions. 
+         <a href="https://tryhackme.com/p/AnikAdnan28" target="_blank">View full profile at TryHackMe →</a>
       </p>
-
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn--accent">View Projects</a>
-        <a href="./Anik_Adnan_CV.pdf" download="Anik_Adnan_CV.pdf" class="btn btn--ghost" aria-label="Download CV (PDF)">Download CV</a>
-      </div>
-
-      <div class="hero-socials">
-        <!-- GitHub -->
-        <a href="https://github.com/Anik-Adnan" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-        </a>
-        <!-- LinkedIn -->
-        <a href="https://linkedin.com/in/anikadnan9" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-          </svg>
-        </a>
-        <!-- Email -->
-        <a href="mailto:anikadnanict17@gmail.com" aria-label="Send email">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-        </a>
-      </div>
     </div>
 
-    <a href="#about" class="hero-scroll" aria-label="Scroll down">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"/>
-      </svg>
+    <!-- Badges -->
+    <div class="thm-sub-head fi">🥇 Earned Badges</div>
+    <div class="thm-badges-grid" id="thm-badges"></div>
+
+    <!-- Rooms -->
+    <div class="thm-sub-head fi">🧩 Completed Rooms</div>
+    <div class="thm-rooms-grid" id="thm-rooms"></div>
+    <div style="text-align:center;margin-top:1rem">
+      <button class="load-rooms-btn" id="load-rooms-btn">Load More Rooms ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS
+============================================================ -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Tools &amp; Technologies</span>
+      <h2 class="sec-title">Technical &amp; Research Skills</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Programming Languages</div>
+        <div class="pill-wrap">
+          <span class="pill">C</span><span class="pill">C++</span><span class="pill">Java</span><span class="pill">Dart</span><span class="pill">Python</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Dev Tools &amp; VCS</div>
+        <div class="pill-wrap">
+          <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">IntelliJ IDEA</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Databases &amp; Cloud</div>
+        <div class="pill-wrap">
+          <span class="pill">MySQL</span><span class="pill">SQL</span><span class="pill">Firebase</span><span class="pill">Firestore</span><span class="pill">FCM</span><span class="pill">Auth</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Web Development</div>
+        <div class="pill-wrap">
+          <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">Django</span><span class="pill">RESTful APIs</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Frameworks &amp; Mobile</div>
+        <div class="pill-wrap">
+          <span class="pill">Flutter</span><span class="pill">Django</span><span class="pill">Android Studio</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Data Science</div>
+        <div class="pill-wrap">
+          <span class="pill">NumPy</span><span class="pill">Pandas</span><span class="pill">Matplotlib</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">AI / ML / NLP</div>
+        <div class="pill-wrap">
+          <span class="pill">PyTorch</span><span class="pill">TensorFlow</span><span class="pill">Scikit-learn</span><span class="pill">Hugging Face</span><span class="pill">OpenCV</span><span class="pill">Transfer Learning</span><span class="pill">Transformers</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Cybersecurity Tools</div>
+        <div class="pill-wrap">
+          <span class="pill">Kali Linux</span><span class="pill">Nmap</span><span class="pill">Metasploit</span><span class="pill">Wireshark</span><span class="pill">OpenVAS</span><span class="pill">SIEM</span><span class="pill">IDS</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Networking</div>
+        <div class="pill-wrap">
+          <span class="pill">LAN/WAN</span><span class="pill">HTTP</span><span class="pill">DNS</span><span class="pill">DHCP</span><span class="pill">SMTP</span><span class="pill">FTP</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Competitive Programming</div>
+        <div class="pill-wrap">
+          <a href="https://codeforces.com/profile/Anik_Adnan" target="_blank" class="pill">Codeforces</a>
+          <a href="https://uhunt.onlinejudge.org/id/1126199" target="_blank" class="pill">UVA Online Judge</a>
+          <a href="https://www.hackerrank.com/profile/anikadnanict17" target="_blank" class="pill">HackerRank</a>
+          <a href="https://leetcode.com/u/Anik_Adnan/" target="_blank" class="pill">LeetCode</a>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Hands-on Cybersecurity</div>
+        <div class="pill-wrap">
+          <a href="https://tryhackme.com/p/AnikAdnan28" target="_blank" class="pill">TryHackMe — Top 20%</a>
+          <span class="pill">28 Rooms</span>
+          <span class="pill">8 Badges</span>
+        </div>
+      </div>
+      <div class="skill-cat fi">
+        <div class="skill-cat-title">Languages</div>
+        <div class="pill-wrap">
+          <span class="pill">Bengali (Native)</span>
+          <span class="pill">English (Professional)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CERTIFICATIONS
+============================================================ -->
+<section id="certifications">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Credentials</span>
+      <h2 class="sec-title">Certifications &amp; Training</h2>
+      <div class="sec-rule"></div>
+      <p style="margin-top:.75rem;font-size:.85rem;color:var(--subtle)">
+        All credentials verifiable at
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" style="color:var(--accent);font-weight:600">LinkedIn Certifications →</a>
+      </p>
+    </div>
+    <div class="cert-tabs" id="cert-tabs">
+      <button class="cert-tab active" onclick="switchCertTab(0)">🔐 Cybersecurity &amp; Threat Intelligence</button>
+      <button class="cert-tab" onclick="switchCertTab(1)">💻 Software Dev &amp; Web</button>
+      <button class="cert-tab" onclick="switchCertTab(2)">📚 Fundamentals</button>
+    </div>
+    <!-- Tab 0: Cybersecurity -->
+    <div class="cert-panel active" id="cert-panel-0">
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">GGL</div>
+        <div class="cert-name">Google Cybersecurity Professional Certificate</div>
+        <div class="cert-issuer">Coursera</div>
+        <div class="cert-date">August 2025</div>
+        <div class="cert-desc">8-course specialization covering Python scripting, Linux, SQL, SIEM tools, and Intrusion Detection Systems; risk identification and mitigation.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">IBM</div>
+        <div class="cert-name">IBM Ethical Hacking with Open Source Tools Specialization</div>
+        <div class="cert-issuer">Coursera</div>
+        <div class="cert-date">August 2025</div>
+        <div class="cert-desc">Penetration testing and vulnerability assessment using Kali Linux, Wireshark, Metasploit, and OpenVAS.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">MSF</div>
+        <div class="cert-name">Copilot for Cybersecurity</div>
+        <div class="cert-issuer">Microsoft via Coursera</div>
+        <div class="cert-date">July 2025</div>
+        <div class="cert-desc">AI-driven copilot workflows for threat detection automation and security posture management.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">IBM</div>
+        <div class="cert-name">Cybersecurity Assessment: CompTIA Security+ &amp; CySA+</div>
+        <div class="cert-issuer">IBM via Coursera</div>
+        <div class="cert-date">July 2025</div>
+        <div class="cert-desc">Incident response, vulnerability metrics, and tactical assessment aligned with CompTIA industry baselines.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">PKT</div>
+        <div class="cert-name">Nmap for Penetration Testing: Beginner to Advanced</div>
+        <div class="cert-issuer">Packt via Coursera</div>
+        <div class="cert-date">August 2025</div>
+        <div class="cert-desc">Network discovery, port scanning, firewall evasion, and NSE scripting techniques.</div>
+      </a>
+    </div>
+    <!-- Tab 1: Software Dev -->
+    <div class="cert-panel" id="cert-panel-1">
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">upG</div>
+        <div class="cert-name">Learn Python Libraries: NumPy, Matplotlib &amp; Pandas</div>
+        <div class="cert-issuer">upGrad</div>
+        <div class="cert-date">December 2025</div>
+        <div class="cert-desc">Hands-on training in NumPy array operations, Matplotlib data visualisation, and Pandas data manipulation for scientific computing workflows.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">ICT</div>
+        <div class="cert-name">Python (Django) Professional Training</div>
+        <div class="cert-issuer">Dept. of ICT, MBSTU / Bangladesh Computer Council EDGE Project</div>
+        <div class="cert-date">July 2025</div>
+        <div class="cert-desc">80-hour intensive full-stack web development programme (Jun–Dec 2024) specialising in Python and the Django framework.</div>
+      </a>
+    </div>
+    <!-- Tab 2: Fundamentals -->
+    <div class="cert-panel" id="cert-panel-2">
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">NLP</div>
+        <div class="cert-name">Introduction to Natural Language Processing</div>
+        <div class="cert-issuer">Online Certification</div>
+        <div class="cert-date">—</div>
+        <div class="cert-desc">Foundations of NLP: tokenisation, language models, text classification, and sequence-to-sequence tasks.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">PY</div>
+        <div class="cert-name">Python for Beginners</div>
+        <div class="cert-issuer">Online Certification</div>
+        <div class="cert-date">—</div>
+        <div class="cert-desc">Core Python syntax, data structures, control flow, functions, and introductory object-oriented programming.</div>
+      </a>
+      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <div class="cert-badge">DSA</div>
+        <div class="cert-name">Data Structures &amp; Algorithms</div>
+        <div class="cert-issuer">Online Certification</div>
+        <div class="cert-date">—</div>
+        <div class="cert-desc">Arrays, linked lists, trees, graphs, sorting/searching algorithms, and complexity analysis.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LEADERSHIP & VOLUNTEERING
+============================================================ -->
+<section id="leadership">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Service &amp; Impact</span>
+      <h2 class="sec-title">Leadership &amp; Volunteering</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="lead-timeline">
+      <div class="lead-item">
+        <div class="lead-dot"></div>
+        <div class="lead-card">
+          <div class="lead-role">Vice Chair</div>
+          <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" class="lead-org">IEEE MBSTU Student Branch</a>
+          <div class="lead-meta">
+            <span class="tl-year">Jan 2025 – Jan 2026</span>
+          </div>
+          <p class="lead-desc">Directed planning and execution of technical workshops, research seminars, and IEEE-affiliated events, enhancing student engagement and technical capacity within the MBSTU community.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-dot"></div>
+        <div class="lead-card">
+          <div class="lead-role">President</div>
+          <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" class="lead-org">The Circle of Greater Kushtia Association, MBSTU</a>
+          <div class="lead-meta">
+            <span class="tl-year">Mar 2025 – Mar 2026</span>
+          </div>
+          <p class="lead-desc">Led a multi-district student organization, organizing reception, farewell, cultural, tour, and sports events with faculty coordination across academic cycles.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-dot"></div>
+        <div class="lead-card">
+          <div class="lead-role">Vice President</div>
+          <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" class="lead-org">The Circle of Greater Kushtia Association, MBSTU</a>
+          <div class="lead-meta">
+            <span class="tl-year">Mar 2023 – Mar 2025</span>
+          </div>
+          <p class="lead-desc">Coordinated events and member engagement, supporting organizational continuity through academic and cultural programs over two consecutive years.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-dot"></div>
+        <div class="lead-card">
+          <div class="lead-role">Web Master &amp; University Representative</div>
+          <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" class="lead-org">IEEE MBSTU Student Branch</a>
+          <div class="lead-meta">
+            <span class="tl-year">Jan 2022 – Jan 2023</span>
+          </div>
+          <p class="lead-desc">Developed and maintained the university branch's web platform while serving as the official institutional representative to regional IEEE coordination networks.</p>
+        </div>
+      </div>
+      <div class="lead-item">
+        <div class="lead-dot"></div>
+        <div class="lead-card">
+          <div class="lead-role">Volunteer</div>
+          <a href="https://www.linkedin.com/in/anikadnan9/details/volunteering-experiences/" target="_blank" class="lead-org">EDGE Activation Programme, Dept. of ICT, MBSTU</a>
+          <div class="lead-meta">
+            <span class="tl-year">2024</span>
+          </div>
+          <p class="lead-desc">Supported operational delivery of the EDGE Activation Programme, contributing to training logistics, participant onboarding, and the certificate giving ceremony.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-head fi">
+      <span class="sec-eyebrow">Get in Touch</span>
+      <h2 class="sec-title">Contact</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="contact-grid fi">
+      <a href="mailto:anikadnanict17@gmail.com" class="contact-card">
+        <div class="c-icon">✉️</div>
+        <div><div class="c-lbl">Email</div><div class="c-val">anikadnanict17@gmail.com</div></div>
+      </a>
+      <a href="tel:+8801519600660" class="contact-card">
+        <div class="c-icon">📞</div>
+        <div><div class="c-lbl">Phone</div><div class="c-val">+880 151 960 0660</div></div>
+      </a>
+      <a href="https://linkedin.com/in/anikadnan9" target="_blank" class="contact-card">
+        <div class="c-icon">in</div>
+        <div><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/anikadnan9</div></div>
+      </a>
+      <a href="https://github.com/Anik-Adnan" target="_blank" class="contact-card">
+        <div class="c-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </div>
+        <div><div class="c-lbl">GitHub</div><div class="c-val">github.com/Anik-Adnan</div></div>
+      </a>
+    </div>
+    <div class="contact-addr fi">
+      <div class="c-icon">📍</div>
+      <div><div class="c-lbl">Address</div><div class="c-val">Santosh, Tangail, Dhaka, Bangladesh</div></div>
+    </div>
+    <div class="ref-note fi">
+      <strong>Academic References Available Upon Request</strong><br/>
+      Prof. Dr. Mohammad Badrul Alam Miah and Prof. Dr. Monir Morshed,<br/>
+      Department of ICT, Mawlana Bhashani Science and Technology University (MBSTU), Tangail-1902.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="foot-socials">
+    <a href="mailto:anikadnanict17@gmail.com" class="foot-soc" title="Email">✉</a>
+    <a href="https://linkedin.com/in/anikadnan9" target="_blank" class="foot-soc" title="LinkedIn">in</a>
+    <a href="https://github.com/Anik-Adnan" target="_blank" class="foot-soc" title="GitHub">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
     </a>
-  </section>
+    <a href="https://anik-adnan.github.io/" target="_blank" class="foot-soc" title="Portfolio">🌐</a>
+    <a href="https://tryhackme.com/p/AnikAdnan28" target="_blank" class="foot-soc" title="TryHackMe">🛡</a>
+  </div>
+  <p class="foot-txt">
+    © 2025 <a href="https://anik-adnan.github.io/" target="_blank">Anik Adnan</a> · Designed with purpose
+  </p>
+</footer>
 
-  <!-- ============================================================
-       ABOUT
-  ============================================================ -->
-  <section id="about" class="section section--alt">
-    <div class="container">
-      <p class="section-heading">About Me</p>
-      <div class="about-grid reveal">
-        <div class="about-photo">
-          <img src="./photo.jpeg" alt="Anik Adnan" />
-        </div>
-        <div class="about-right">
-          <p class="about-bio">
-            I am an ICT graduate from Mawlana Bhashani Science and Technology University (MBSTU)
-            , currently pursuing my MSc in ICT. I work as an Instructor
-            in ICT and vocational training while actively conducting research in Artificial
-            Intelligence, Machine Learning, and Natural Language Processing. My goal is to
-            contribute to university-level academic research and teaching, particularly in
-            AI-driven applications for real-world problems.
-          </p>
-          <div class="stats-row">
-            <div class="stat-card">
-              <div class="stat-number">
-                <span class="blur-text">3.71</span><span style="font-size:1rem;">/4.00</span></div>
-              <div class="stat-label">B.Sc. CGPA</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">2</div>
-              <div class="stat-label">Research Papers</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">2</div>
-              <div class="stat-label">Projects Built</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">5+</div>
-              <div class="stat-label">Certifications</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ── CONFIGURATION ──────────────────────────────────────────── */
+// Replace with your GitHub Personal Access Token
+// (Settings → Developer settings → Tokens (classic) → scope: public_repo)
+const GITHUB_TOKEN = "YOUR_GITHUB_PAT_HERE";
+const GITHUB_USER  = "Anik-Adnan";
+const THM_USER     = "AnikAdnan28";
 
-  <!-- ============================================================
-       EDUCATION
-  ============================================================ -->
-  <section id="education" class="section">
-    <div class="container">
-      <p class="section-heading">Education</p>
-      <div class="timeline reveal">
+/* ── TYPEWRITER ──────────────────────────────────────────────── */
+(function(){
+  const titles = ["AI / ML / NLP Researcher","Instructor","IEEE Vice Chair","Emerging Academic"];
+  let idx=0, ch=0, del=false;
+  const el = document.getElementById('typewriter');
+  function tick(){
+    const cur = titles[idx];
+    el.textContent = del ? cur.slice(0,--ch) : cur.slice(0,++ch);
+    if(!del && ch===cur.length){setTimeout(()=>{del=true;tick();},2200);return;}
+    if(del && ch===0){del=false;idx=(idx+1)%titles.length;}
+    setTimeout(tick, del?48:105);
+  }
+  tick();
+})();
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-degree">MSc in Information &amp; Communication Technology <em style="font-weight:400; font-size:0.9em;">(Ongoing)</em></div>
-            <div class="timeline-school">Mawlana Bhashani Science and Technology University (MBSTU), Santosh, Tangail-1902</div>
-            <div class="timeline-meta">
-              <span class="timeline-year">2025 – Present</span>
-              <span class="timeline-ongoing">Ongoing</span>
-            </div>
-          </div>
-        </div>
+/* ── NAVBAR ──────────────────────────────────────────────────── */
+const navbar    = document.getElementById('navbar');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu= document.getElementById('mobile-menu');
+const allNavAs  = document.querySelectorAll('#nav-links-desktop a, #mobile-menu a');
+const allSects  = Array.from(document.querySelectorAll('section[id]'));
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-degree">B.Sc. (Engineering) in Information &amp; Communication Technology</div>
-            <div class="timeline-school">Mawlana Bhashani Science and Technology University (MBSTU), Santosh, Tangail-1902</div>
-            <div class="timeline-meta">
-              <span class="timeline-year">Academic Session: 2019 – 2023 &nbsp;·&nbsp; Passed: 20July 2025</span>
-             <span class="timeline-gpa blur-text">CGPA: 3.71 / 4.00</span>
-            </div>
-          </div>
-        </div>
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}));
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-degree">Higher Secondary Certificate (HSC)</div>
-            <div class="timeline-school">Bamandi Nishipur Higher Secondary School, Jessore Board</div>
-            <div class="timeline-meta">
-              <span class="timeline-year">Passing Year: 2018</span>
-              <span class="timeline-gpa">GPA: <span class="blur-text">4.92</span> / 5.00</span>
-            </div>
-          </div>
-        </div>
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>10);
+  let cur='';
+  allSects.forEach(s=>{
+    if(s.getBoundingClientRect().top<=80)cur=s.id;
+  });
+  allNavAs.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+},{passive:true});
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-degree">Secondary School Certificate (SSC)</div>
-            <div class="timeline-school">Gangni Secondary School and College, Meherpur, Jessore Board</div>
-            <div class="timeline-meta">
-              <span class="timeline-year">Passing Year: 2016</span>
-              <span class="timeline-gpa">GPA: <span class="blur-text">5.00</span> / 5.00</span>
-            </div>
-          </div>
-        </div>
+/* ── CGPA BLUR TOGGLE ─────────────────────────────────────────── */
+function revealCGPA(){
+  const blur=document.getElementById('cgpa-blur');
+  const lock=document.getElementById('cgpa-lock');
+  const rev=blur.classList.toggle('unblurred');
+  lock.textContent=rev?'🔓':'🔒';
+  lock.title=rev?'Click to hide':'Click to reveal';
+}
 
-      </div>
-    </div>
-  </section>
+/* ── CERT TABS ───────────────────────────────────────────────── */
+function switchCertTab(i){
+  document.querySelectorAll('.cert-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  document.querySelectorAll('.cert-panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+}
 
-  <!-- ============================================================
-       RESEARCH
-  ============================================================ -->
-  <section id="research" class="section section--alt">
-    <div class="container">
-      <p class="section-heading">Research Publications</p>
+/* ── INTERSECTION OBSERVER ───────────────────────────────────── */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.12});
+document.querySelectorAll('.fi,.fi-left,.tl-item,.lead-item').forEach(el=>io.observe(el));
 
-      <div class="research-grid reveal">
+/* ── UTILITY: time ago ───────────────────────────────────────── */
+function timeAgo(ds){
+  if(!ds)return'';
+  const d=Math.floor((Date.now()-new Date(ds))/(864e5));
+  if(d<1)return'today';if(d===1)return'1 day ago';
+  if(d<30)return d+' days ago';
+  const m=Math.floor(d/30);
+  if(m===1)return'1 month ago';if(m<12)return m+' months ago';
+  const y=Math.floor(m/12);return y+' year'+(y>1?'s':'')+' ago';
+}
 
-        <div class="card research-card">
-          <div class="badges">
-            <span class="tag tag--amber">Under Review</span>
-            <span class="tag tag--navy">1st Author</span>
-          </div>
-          <p class="paper-title">Multi-Scale Insect Classification Using Attention-Enhanced Ensembles for Sustainable Pest Management</p>
-          <p class="paper-journal">IAES International Journal of Artificial Intelligence (IJ-AI)</p>
-          <p class="paper-desc">Proposes a multi-scale attention-enhanced ensemble model for automated pest insect identification to support sustainable agricultural management.</p>
-        </div>
+/* ── GITHUB: repo card (GraphQL) ─────────────────────────────── */
+function buildRepoCard(repo, dark=true){
+  const card=document.createElement('div');
+  card.className='repo-card';
+  const topics=(repo.repositoryTopics?.nodes||[]).slice(0,3).map(t=>t.topic.name);
+  const url=repo.url||repo.html_url||'#';
+  const lang=repo.primaryLanguage||null;
+  const langName=lang?(lang.name||repo.language||''):(repo.language||'');
+  const langColor=lang?(lang.color||'#aaa'):'#aaa';
+  const stars=repo.stargazerCount??repo.stargazers_count??0;
+  const forks=repo.forkCount??repo.forks_count??0;
+  const updated=repo.updatedAt||repo.updated_at||'';
+  const desc=repo.description||'No description available.';
+  card.innerHTML=`
+    <a href="${url}" target="_blank" rel="noopener" class="repo-name">${repo.name}</a>
+    <p class="repo-desc">${desc}</p>
+    ${langName?`<div class="repo-lang"><span class="lang-dot" style="background:${langColor}"></span>${langName}</div>`:''}
+    <div class="repo-stats"><span>⭐ ${stars}</span><span>🍴 ${forks}</span></div>
+    ${topics.length?`<div class="repo-topics">${topics.map(t=>`<span class="repo-topic">${t}</span>`).join('')}</div>`:''}
+    ${updated?`<p class="repo-updated">Updated ${timeAgo(updated)}</p>`:''}
+    <a href="${url}" target="_blank" rel="noopener" class="repo-link-btn">View on GitHub →</a>
+  `;
+  return card;
+}
 
-        <div class="card research-card">
-          <div class="badges">
-            <span class="tag tag--green">Ready for Submission</span>
-            <span class="tag tag--accent">2nd Author</span>
-          </div>
-          <p class="paper-title">Computational Insights into Coronene and Doped Nanostructures as Anticancer Drug Carriers (DFT &amp; Molecular Docking Analysis)</p>
-          <p class="paper-journal">Manuscript finalized — prepared for journal submission</p>
-          <p class="paper-desc">DFT and molecular docking analysis of coronene-based nanostructures as potential anticancer drug delivery carriers.</p>
-        </div>
+/* ── GITHUB: skeletons ───────────────────────────────────────── */
+function showSkeletons(container,n){
+  container.innerHTML='';
+  for(let i=0;i<n;i++){
+    container.innerHTML+=`<div class="repo-card">
+      <div class="skel" style="height:14px;width:65%;margin-bottom:8px"></div>
+      <div class="skel" style="height:11px;width:100%;margin-bottom:4px"></div>
+      <div class="skel" style="height:11px;width:80%;margin-bottom:12px"></div>
+      <div class="skel" style="height:10px;width:45%"></div>
+    </div>`;
+  }
+}
 
-      </div>
-
-      <div class="reveal">
-        <p class="interests-heading">Research Interests</p>
-        <div class="interests-cloud">
-          <span class="tag tag--navy">Artificial Intelligence</span>
-          <span class="tag tag--navy">Machine Learning</span>
-          <span class="tag tag--navy">Deep Learning</span>
-          <span class="tag tag--navy">Natural Language Processing</span>
-          <span class="tag tag--navy">Computer Vision</span>
-          <span class="tag tag--navy">Digital Image Processing</span>
-          <span class="tag tag--navy">Cybersecurity &amp; Threat Intelligence</span>
-          <span class="tag tag--navy">Bio-Informatics / Nanomaterials</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       PROJECTS
-  ============================================================ -->
-  <section id="projects" class="section">
-    <div class="container">
-      <p class="section-heading">Key Projects</p>
-      <div class="projects-grid reveal">
-
-        <div class="card project-card">
-          <div class="project-top">
-            <p class="project-name">Biswas Shopping — Full-Stack E-Commerce Mobile &amp; Web Application</p>
-            <span class="project-year">2023</span>
-          </div>
-          <div class="project-tags">
-            <span class="tag tag--accent">Flutter</span>
-            <span class="tag tag--accent">Firebase</span>
-            <span class="tag tag--accent">Firestore</span>
-            <span class="tag tag--accent">FCM</span>
-            <span class="tag tag--accent">GetX</span>
-            <span class="tag tag--accent">Dart</span>
-          </div>
-          <ul class="project-bullets">
-            <li>Cross-platform e-commerce app (Android/iOS/Web) with real-time product catalogue, cart, push notifications, and secure authentication.</li>
-            <li>Implemented Firebase Firestore for real-time sync and GetX state management for reactive cross-platform UI updates.</li>
-          </ul>
-          <a href="https://github.com/Anik-Adnan/BiswasShoppingBD" target="_blank" rel="noopener noreferrer" class="btn btn--outline project-link">View on GitHub</a>
-        </div>
-
-        <div class="card project-card">
-          <div class="project-top">
-            <p class="project-name">SafetyInsurance — Emergency Android Application</p>
-            <span class="project-year">Aug 2023</span>
-          </div>
-          <div class="project-tags">
-            <span class="tag tag--accent">Java</span>
-            <span class="tag tag--accent">Android Studio</span>
-            <span class="tag tag--accent">XML</span>
-            <span class="tag tag--accent">GPS API</span>
-          </div>
-          <ul class="project-bullets">
-            <li>Safety-critical Android app that sends automatic emergency SMS with live GPS location on volume button trigger.</li>
-            <li>Integrated background location service supporting up to four emergency contacts with hardware-triggered dispatch.</li>
-          </ul>
-          <a href="https://github.com/Anik-Adnan/SafTy-Insurance-Mobile-Application-Using-JAVA" target="_blank" rel="noopener noreferrer" class="btn btn--outline project-link">View on GitHub</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SKILLS
-  ============================================================ -->
-  <section id="skills" class="section section--alt">
-    <div class="container">
-      <p class="section-heading">Technical &amp; Research Skills</p>
-      <div class="skills-grid reveal">
-
-        <div class="card skill-card">
-          <div class="skill-category">Programming Languages</div>
-          <div class="skill-tags">
-            <span class="skill-tag">C</span>
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">Dart</span>
-            <span class="skill-tag">Python</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">AI / ML / NLP</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Deep Learning</span>
-            <span class="skill-tag">NLP</span>
-            <span class="skill-tag">Computer Vision</span>
-            <span class="skill-tag">Digital Image Processing</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Frameworks &amp; Mobile</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Flutter (Android/iOS/Web)</span>
-            <span class="skill-tag">Django</span>
-            <span class="skill-tag">Android Studio</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Web Development</div>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Databases &amp; Cloud</div>
-          <div class="skill-tags">
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">Firebase Firestore</span>
-            <span class="skill-tag">Firebase FCM</span>
-            <span class="skill-tag">Firebase Auth</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Dev Tools &amp; VCS</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">IntelliJ IDEA</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Cybersecurity</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Kali Linux</span>
-            <span class="skill-tag">Metasploit</span>
-            <span class="skill-tag">Wireshark</span>
-            <span class="skill-tag">Nmap</span>
-            <span class="skill-tag">OpenVAS</span>
-            <span class="skill-tag">SIEM</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Networking &amp; OS</div>
-          <div class="skill-tags">
-            <span class="skill-tag">LAN/WAN</span>
-            <span class="skill-tag">HTTP</span>
-            <span class="skill-tag">DNS</span>
-            <span class="skill-tag">DHCP</span>
-            <span class="skill-tag">SMTP</span>
-            <span class="skill-tag">FTP</span>
-            <span class="skill-tag">Windows</span>
-            <span class="skill-tag">Kali Linux</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Languages</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Bengali (Native)</span>
-            <span class="skill-tag">English (Professional Working)</span>
-          </div>
-        </div>
-
-        <div class="card skill-card">
-          <div class="skill-category">Competitive Programming</div>
-          <div class="skill-tags">
-            <a href="https://codeforces.com/profile/Anik_Adnan" target="_blank" rel="noopener noreferrer" class="skill-tag" style="color:var(--accent);">Codeforces</a>
-            <a href="https://uhunt.onlinejudge.org/id/1126199" target="_blank" rel="noopener noreferrer" class="skill-tag" style="color:var(--accent);">UVA Online Judge</a>
-            <a href="https://www.hackerrank.com/profile/anikadnanict17" target="_blank" rel="noopener noreferrer" class="skill-tag" style="color:var(--accent);">HackerRank</a>
-            <a href="https://leetcode.com/u/Anik_Adnan/" target="_blank" rel="noopener noreferrer" class="skill-tag" style="color:var(--accent);">LeetCode</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CERTIFICATIONS
-  ============================================================ -->
-  <section id="certifications" class="section">
-    <div class="container">
-      <p class="section-heading">Certifications &amp; Professional Training</p>
-      <p style="font-size:0.82rem; color:var(--subtle); margin-bottom:32px;">
-        View all credentials:
-        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer">linkedin.com/in/anikadnan9/details/certifications</a>
-      </p>
-
-      <div class="reveal">
-
-        <div class="cert-group">
-          <div class="cert-group-title">Cybersecurity &amp; Threat Intelligence</div>
-          <div class="cert-list">
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Google Cybersecurity Professional Certificate</div>
-                <div class="cert-meta">Coursera &nbsp;·&nbsp; Aug 2025 &nbsp;·&nbsp; 8-course specialization covering Python scripting, Linux, SQL, SIEM tools, and Intrusion Detection Systems.</div>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">IBM Ethical Hacking with Open Source Tools Specialization</div>
-                <div class="cert-meta">Coursera &nbsp;·&nbsp; Aug 2025 &nbsp;·&nbsp; Penetration testing and vulnerability assessment using Kali Linux, Wireshark, Metasploit, and OpenVAS.</div>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Copilot for Cybersecurity</div>
-                <div class="cert-meta">Microsoft via Coursera &nbsp;·&nbsp; Jul 2025 &nbsp;·&nbsp; AI-driven copilot workflows for threat detection automation and security posture management.</div>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Cybersecurity Assessment: CompTIA Security+ &amp; CySA+</div>
-                <div class="cert-meta">IBM via Coursera &nbsp;·&nbsp; Jul 2025 &nbsp;·&nbsp; Incident response, vulnerability metrics, and tactical assessment aligned with industry baselines.</div>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Nmap for Penetration Testing: Beginner to Advanced</div>
-                <div class="cert-meta">Packt via Coursera &nbsp;·&nbsp; Aug 2025 &nbsp;·&nbsp; Network discovery, port scanning, firewall evasion, and NSE scripting.</div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div class="cert-group">
-          <div class="cert-group-title">Software Development &amp; Web Technologies</div>
-          <div class="cert-list">
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Learn Python Libraries: NumPy, Matplotlib &amp; Pandas</div>
-                <div class="cert-meta">upGrad &nbsp;·&nbsp; Dec 2025 &nbsp;·&nbsp; Hands-on training in NumPy array operations, Matplotlib data visualisation, and Pandas data manipulation.</div>
-              </div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div>
-                <div class="cert-name">Python (Django) Professional Training</div>
-                <div class="cert-meta">Dept. of ICT, MBSTU / Bangladesh Computer Council EDGE Project &nbsp;·&nbsp; Jul 2025 &nbsp;·&nbsp; 80-hour intensive full-stack web development programme specialising in Python and the Django framework.</div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div class="cert-group">
-          <div class="cert-group-title">Fundamentals &amp; Core Knowledge</div>
-          <div class="cert-list">
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div><div class="cert-name">Introduction to Natural Language Processing</div></div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div><div class="cert-name">Python for Beginners</div></div>
-            </a>
-            <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-item" style="text-decoration:none; color:inherit;">
-              <div class="cert-dot"></div>
-              <div><div class="cert-name">Data Structures &amp; Algorithms</div></div>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       LEADERSHIP
-  ============================================================ -->
-  <section id="leadership" class="section section--alt">
-    <div class="container">
-      <p class="section-heading">Leadership &amp; Volunteering</p>
-      <div class="leadership-list reveal">
-
-        <div class="leadership-item">
-          <div class="leadership-icon">VC</div>
-          <div>
-            <div class="leadership-role">Vice Chair</div>
-            <div class="leadership-org">
-              <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" rel="noopener noreferrer">IEEE MBSTU Student Branch</a>
-            </div>
-            <span class="leadership-date">January 2025 – January 2026</span>
-            <p style="font-size:0.84rem; color:var(--subtle); margin-top:6px;">Directed planning and execution of technical workshops, research seminars, and IEEE-affiliated events to enhance student engagement.</p>
-          </div>
-        </div>
-
-        <div class="leadership-item">
-          <div class="leadership-icon">Pr</div>
-          <div>
-            <div class="leadership-role">President</div>
-            <div class="leadership-org">
-              <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" rel="noopener noreferrer">The Circle of Greater Kushtia Association, MBSTU</a>
-            </div>
-            <span class="leadership-date">March 2025 – March 2026</span>
-            <p style="font-size:0.84rem; color:var(--subtle); margin-top:6px;">Led a multi-district student organization, organizing key events (reception, farewell, cultural, tours, sports) with faculty coordination.</p>
-          </div>
-        </div>
-
-        <div class="leadership-item">
-          <div class="leadership-icon">VP</div>
-          <div>
-            <div class="leadership-role">Vice President</div>
-            <div class="leadership-org">
-              <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" rel="noopener noreferrer">The Circle of Greater Kushtia Association, MBSTU</a>
-            </div>
-            <span class="leadership-date">March 2023 – March 2025</span>
-            <p style="font-size:0.84rem; color:var(--subtle); margin-top:6px;">Coordinated events and member engagement, supporting organizational continuity through academic and cultural programs.</p>
-          </div>
-        </div>
-
-        <div class="leadership-item">
-          <div class="leadership-icon">WM</div>
-          <div>
-            <div class="leadership-role">Web Master &amp; University Representative</div>
-            <div class="leadership-org">
-              <a href="https://www.linkedin.com/in/anikadnan9/details/organizations/" target="_blank" rel="noopener noreferrer">IEEE MBSTU Student Branch</a>
-            </div>
-            <span class="leadership-date">January 2022 – January 2023</span>
-            <p style="font-size:0.84rem; color:var(--subtle); margin-top:6px;">Developed and maintained the university branch's web platform while serving as the official institutional representative to regional IEEE coordination networks.</p>
-          </div>
-        </div>
-
-        <div class="leadership-item">
-          <div class="leadership-icon">Vo</div>
-          <div>
-            <div class="leadership-role">Volunteer</div>
-            <div class="leadership-org">
-              <a href="https://www.linkedin.com/in/anikadnan9/details/volunteering-experiences/" target="_blank" rel="noopener noreferrer">EDGE Activation Programme, Dept. of ICT, MBSTU</a>
-            </div>
-            <span class="leadership-date">2024</span>
-            <p style="font-size:0.84rem; color:var(--subtle); margin-top:6px;">Supported operational delivery of the EDGE Activation Programme, contributing to training logistics, participant onboarding, and certificate giving ceremony.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CONTACT
-  ============================================================ -->
-  <section id="contact">
-    <div class="container">
-      <p class="section-heading">Get In Touch</p>
-      <div class="contact-grid reveal">
-
-        <!-- Left: contact details -->
-        <div>
-          <div class="contact-detail-list">
-
-            <div class="contact-detail">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">Email</div>
-                <div class="contact-value">
-                  <a href="mailto:anikadnanict17@gmail.com">anikadnanict17@gmail.com</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="contact-detail">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 13.92v3z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">Phone</div>
-                <div class="contact-value">+880 151 960 0660</div>
-              </div>
-            </div>
-
-            <div class="contact-detail">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">LinkedIn</div>
-                <div class="contact-value">
-                  <a href="https://linkedin.com/in/anikadnan9" target="_blank" rel="noopener noreferrer">linkedin.com/in/anikadnan9</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="contact-detail">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">GitHub</div>
-                <div class="contact-value">
-                  <a href="https://github.com/Anik-Adnan" target="_blank" rel="noopener noreferrer">github.com/Anik-Adnan</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="contact-detail">
-              <div class="contact-icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div>
-                <div class="contact-label">Location</div>
-                <div class="contact-value">Santosh, Tangail, Dhaka, Bangladesh</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right: contact form -->
-        <div>
-          <!--
-            EMAIL SETUP (one-time, 2 minutes):
-            1. Go to https://web3forms.com
-            2. Enter: anikadnanict17@gmail.com  → click "Create Access Key"
-            3. Copy the key and paste it below replacing YOUR_ACCESS_KEY
-          -->
-          <div class="contact-form" id="contactForm">
-            <div class="form-group">
-              <label for="contactName">Your Name</label>
-              <input type="text" id="contactName" placeholder="e.g. Rahim Uddin" autocomplete="name" />
-            </div>
-            <div class="form-group">
-              <label for="contactEmail">Your Email</label>
-              <input type="email" id="contactEmail" placeholder="you@email.com" autocomplete="email" />
-            </div>
-            <div class="form-group">
-              <label for="contactMessage">Message</label>
-              <textarea id="contactMessage" placeholder="Write your message here…"></textarea>
-            </div>
-            <button type="button" class="btn btn--accent" id="contactSubmit" style="align-self:flex-start;">
-              <span id="submitLabel">Send Message</span>
-              <span id="submitSpinner" style="display:none;">Sending…</span>
-            </button>
-            <div class="form-success" id="formSuccess" role="alert">
-              ✓ Message sent! I will get back to you soon.
-            </div>
-            <div class="form-error" id="formError" role="alert" style="display:none; background:rgba(239,68,68,0.15); border:1px solid #f87171; border-radius:8px; padding:14px 18px; font-size:0.88rem; color:#fca5a5; margin-top:8px;">
-              ✗ Something went wrong. Please email me directly at anikadnanict17@gmail.com
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer>
-    <span>© 2025 Anik Adnan &nbsp;·&nbsp; Designed &amp; built with purpose</span>
-  </footer>
-
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
-  <script>
-    /* ---- Navbar scroll ---- */
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    /* ---- Hamburger ---- */
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', open);
-      hamburger.setAttribute('aria-expanded', open);
-    });
-    // Close mobile menu on link click
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    /* ---- Active nav highlighting ---- */
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a, .mobile-link');
-
-    const activateLink = (id) => {
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-      });
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) activateLink(entry.target.id);
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-
-    sections.forEach(s => sectionObserver.observe(s));
-
-    /* ---- Scroll reveal ---- */
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    /* ---- Typewriter ---- */
-    const phrases = [
-      'AI / ML / NLP Researcher',
-      'University Instructor',
-      'MSc Student @ MBSTU',
-      'Flutter & Python Developer'
-    ];
-    const tw = document.getElementById('typewriter-text');
-    let pIdx = 0, cIdx = 0, deleting = false;
-    const typeSpeed = 75, deleteSpeed = 40, pauseMs = 2000;
-
-    function typewriter() {
-      const phrase = phrases[pIdx];
-      if (!deleting) {
-        tw.textContent = phrase.slice(0, ++cIdx);
-        if (cIdx === phrase.length) {
-          deleting = true;
-          setTimeout(typewriter, pauseMs);
-          return;
-        }
-      } else {
-        tw.textContent = phrase.slice(0, --cIdx);
-        if (cIdx === 0) {
-          deleting = false;
-          pIdx = (pIdx + 1) % phrases.length;
-        }
-      }
-      setTimeout(typewriter, deleting ? deleteSpeed : typeSpeed);
+/* ── GITHUB: REST fallback ───────────────────────────────────── */
+async function fetchTopByStars(grid){
+  showSkeletons(grid,6);
+  try{
+    const r=await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=stars&per_page=6`);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const repos=await r.json();
+    grid.innerHTML='';
+    if(Array.isArray(repos)&&repos.length){
+      repos.forEach(rep=>grid.appendChild(buildRepoCard(rep)));
     }
-    typewriter();
+  }catch(e){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,.55);padding:2rem;font-size:.88rem;">
+      Unable to load repositories.
+      <a href="https://github.com/${GITHUB_USER}" target="_blank" style="color:rgba(255,255,255,.8);font-weight:600"> View all at github.com/${GITHUB_USER} →</a>
+    </div>`;
+  }
+}
 
-    /* ---- Contact form — Web3Forms (sends real email, no backend needed) ---- */
-    /* Replace YOUR_ACCESS_KEY below after getting one from https://web3forms.com */
-    const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY';
+/* ── GITHUB: pinned via GraphQL ──────────────────────────────── */
+async function fetchPinned(){
+  const grid=document.getElementById('pinned-repos-grid');
+  const fallNotice=document.getElementById('pinned-fallback-notice');
 
-    document.getElementById('contactSubmit').addEventListener('click', async () => {
-      const name    = document.getElementById('contactName').value.trim();
-      const email   = document.getElementById('contactEmail').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
-
-      // Validate
-      let valid = true;
-      ['contactName','contactEmail','contactMessage'].forEach(id => {
-        const el = document.getElementById(id);
-        if (!el.value.trim()) {
-          el.style.borderColor = '#f87171';
-          valid = false;
-          el.addEventListener('input', function fix() {
-            el.style.borderColor = '';
-            el.removeEventListener('input', fix);
-          });
-        }
-      });
-      if (!valid) return;
-
-      // Loading state
-      const btn = document.getElementById('contactSubmit');
-      document.getElementById('submitLabel').style.display   = 'none';
-      document.getElementById('submitSpinner').style.display = 'inline';
-      btn.disabled = true;
-      document.getElementById('formError').style.display   = 'none';
-      document.getElementById('formSuccess').classList.remove('visible');
-
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            name:    name,
-            email:   email,
-            message: message,
-            subject: 'Portfolio Contact from ' + name
-          })
-        });
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('formSuccess').classList.add('visible');
-          document.getElementById('contactName').value    = '';
-          document.getElementById('contactEmail').value   = '';
-          document.getElementById('contactMessage').value = '';
-          setTimeout(() => document.getElementById('formSuccess').classList.remove('visible'), 8000);
-        } else {
-          throw new Error(data.message || 'Submission failed');
-        }
-      } catch (err) {
-        document.getElementById('formError').style.display = 'block';
-        setTimeout(() => document.getElementById('formError').style.display = 'none', 10000);
-      } finally {
-        document.getElementById('submitLabel').style.display   = 'inline';
-        document.getElementById('submitSpinner').style.display = 'none';
-        btn.disabled = false;
-      }
+  if(!GITHUB_TOKEN||GITHUB_TOKEN==='YOUR_GITHUB_PAT_HERE'){
+    fallNotice.style.display='block';
+    await fetchTopByStars(grid);
+    return;
+  }
+  showSkeletons(grid,6);
+  try{
+    const q=`{user(login:"${GITHUB_USER}"){pinnedItems(first:6,types:REPOSITORY){nodes{...on Repository{name description url stargazerCount forkCount primaryLanguage{name color}updatedAt repositoryTopics(first:5){nodes{topic{name}}}}}}}}`;
+    const r=await fetch('https://api.github.com/graphql',{
+      method:'POST',
+      headers:{Authorization:`Bearer ${GITHUB_TOKEN}`,'Content-Type':'application/json'},
+      body:JSON.stringify({query:q})
     });
-  </script>
+    const data=await r.json();
+    const repos=data?.data?.user?.pinnedItems?.nodes;
+    if(!repos||!repos.length)throw new Error('empty');
+    grid.innerHTML='';
+    repos.forEach(rep=>grid.appendChild(buildRepoCard(rep)));
+  }catch(e){
+    fallNotice.style.display='block';
+    await fetchTopByStars(grid);
+  }
+}
+
+/* ── GITHUB: repo count ──────────────────────────────────────── */
+async function fetchRepoCount(){
+  try{
+    const r=await fetch(`https://api.github.com/users/${GITHUB_USER}`);
+    const d=await r.json();
+    if(d.public_repos){
+      document.getElementById('repo-count-badge').textContent=d.public_repos+' Public Repos';
+    }
+  }catch(e){}
+}
+
+/* ── GITHUB: load more (REST paginated) ──────────────────────── */
+let ghPage=1, ghBusy=false;
+async function loadMoreRepos(){
+  if(ghBusy)return;
+  ghBusy=true;
+  const grid=document.getElementById('all-repos-grid');
+  const btn =document.getElementById('load-more-btn');
+  btn.disabled=true;
+  btn.textContent='Loading…';
+  grid.style.display='grid';
+  try{
+    const r=await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=9&page=${ghPage}`);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const repos=await r.json();
+    if(Array.isArray(repos)&&repos.length){
+      repos.forEach(rep=>{
+        const c=buildRepoCard(rep);
+        grid.appendChild(c);
+        // trigger observe
+        io.observe(c);
+        requestAnimationFrame(()=>c.classList.add('fi'));
+      });
+      ghPage++;
+      if(repos.length<9){
+        btn.style.display='none';
+        const msg=document.createElement('p');
+        msg.style.cssText='text-align:center;color:rgba(255,255,255,.45);font-size:.82rem;margin-top:.75rem';
+        msg.textContent='✓ All repositories loaded';
+        grid.after(msg);
+      }else{btn.disabled=false;btn.textContent='Load More ↓';}
+    }else{btn.style.display='none';}
+  }catch(e){
+    btn.disabled=false;
+    btn.textContent='Error — try again';
+  }
+  ghBusy=false;
+}
+
+/* ── TRYHACKME ────────────────────────────────────────────────── */
+async function fetchTHM(){
+  const statsEl  =document.getElementById('thm-stats');
+  const badgesEl =document.getElementById('thm-badges');
+  const roomsEl  =document.getElementById('thm-rooms');
+  const fallback =document.getElementById('thm-fallback');
+  const rankBadge=document.getElementById('thm-rank-badge');
+
+  /* --- stats --- */
+  let statsOk=false;
+  try{
+    const r=await fetch(`https://tryhackme.com/api/v2/hackers/username/${THM_USER}/`,{signal:AbortSignal.timeout(5000)});
+    const d=await r.json();
+    const data=d?.data||{};
+    const rank=data?.globalRank||data?.rank||null;
+    const rooms=data?.completedRooms??data?.rooms??28;
+    const badges=data?.badges??8;
+    const streak=data?.streak??data?.currentStreak??null;
+    if(rank)rankBadge.textContent='🏆 '+rank;
+    statsEl.innerHTML=`
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🏆</div><div class="thm-stat-val">${rank||'Top 20%'}</div><div class="thm-stat-lbl">Global Rank</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🧩</div><div class="thm-stat-val">${rooms}</div><div class="thm-stat-lbl">Rooms Completed</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🥇</div><div class="thm-stat-val">${badges}</div><div class="thm-stat-lbl">Badges Earned</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🔥</div><div class="thm-stat-val">${streak||'Active'}</div><div class="thm-stat-lbl">Current Streak</div></div>
+    `;
+    statsOk=true;
+    document.querySelectorAll('#thm-stats .fi').forEach(el=>io.observe(el));
+  }catch(e){
+    statsEl.innerHTML=`
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🏆</div><div class="thm-stat-val">Top 20%</div><div class="thm-stat-lbl">Global Rank</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🧩</div><div class="thm-stat-val">28</div><div class="thm-stat-lbl">Rooms Completed</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🥇</div><div class="thm-stat-val">8</div><div class="thm-stat-lbl">Badges Earned</div></div>
+      <div class="thm-stat-card fi"><div class="thm-stat-icon">🔗</div>
+        <div class="thm-stat-val" style="font-size:.85rem">
+          <a href="https://tryhackme.com/p/${THM_USER}" target="_blank" style="color:var(--accent);font-weight:700">View Profile</a>
+        </div>
+        <div class="thm-stat-lbl">TryHackMe</div>
+      </div>
+    `;
+    fallback.style.display='block';
+    document.querySelectorAll('#thm-stats .fi').forEach(el=>io.observe(el));
+  }
+
+  /* --- badges --- */
+  try{
+    const r=await fetch(`https://tryhackme.com/api/v2/hackers/username/${THM_USER}/badges/`,{signal:AbortSignal.timeout(5000)});
+    const d=await r.json();
+    const bds=Array.isArray(d?.data)?d.data:[];
+    if(bds.length){
+      badgesEl.innerHTML='';
+      bds.forEach(b=>{
+        const date=b.earnedAt?new Date(b.earnedAt).toLocaleDateString('en-US',{month:'short',year:'numeric'}):'';
+        const card=document.createElement('div');
+        card.className='thm-badge-card fi';
+        card.innerHTML=`
+          ${b.image?`<img src="${b.image}" alt="${b.name||'Badge'}" class="thm-badge-img" loading="lazy" onerror="this.style.display='none'">`:'<div style="font-size:2.5rem;margin-bottom:.5rem">🏅</div>'}
+          <div class="thm-badge-name">${b.name||'Badge'}</div>
+          ${date?`<div class="thm-badge-date">${date}</div>`:''}
+          ${b.description?`<div style="font-size:.76rem;color:var(--subtle);margin-top:.2rem;line-height:1.45">${b.description}</div>`:''}
+        `;
+        badgesEl.appendChild(card);
+        io.observe(card);
+      });
+    }else throw new Error('no badges');
+  }catch(e){
+    badgesEl.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:1.5rem 0">
+      <a href="https://tryhackme.com/p/${THM_USER}" target="_blank" style="color:var(--accent);font-weight:600;font-size:.88rem">
+        View earned badges at tryhackme.com/p/${THM_USER} →
+      </a>
+    </div>`;
+  }
+
+  /* --- rooms --- */
+  try{
+    const r=await fetch(`https://tryhackme.com/api/v2/hackers/username/${THM_USER}/completed-rooms/`,{signal:AbortSignal.timeout(5000)});
+    const d=await r.json();
+    const rooms=Array.isArray(d?.data)?d.data:[];
+    if(rooms.length){
+      const SHOW=6;
+      rooms.forEach((rm,i)=>{
+        const diff=(rm.difficulty||'').toLowerCase();
+        const dcls=diff==='easy'?'diff-easy':diff==='medium'?'diff-medium':diff==='hard'?'diff-hard':'diff-info';
+        const slug=rm.code||rm.id||rm.slug||'';
+        const card=document.createElement('a');
+        card.className='room-card fi'+(i>=SHOW?' rooms-hidden':'');
+        card.href=slug?`https://tryhackme.com/room/${slug}`:`https://tryhackme.com/p/${THM_USER}`;
+        card.target='_blank';card.rel='noopener';
+        card.innerHTML=`
+          <div class="room-name">${rm.title||rm.name||'Room'}</div>
+          ${rm.difficulty?`<span class="diff-pill ${dcls}">${rm.difficulty}</span>`:''}
+          ${rm.category?`<div class="room-cat">${rm.category}</div>`:''}
+        `;
+        roomsEl.appendChild(card);
+        io.observe(card);
+      });
+      if(rooms.length>SHOW){
+        const btn=document.getElementById('load-rooms-btn');
+        btn.style.display='inline-block';
+        btn.addEventListener('click',()=>{
+          document.querySelectorAll('.rooms-hidden').forEach(el=>el.classList.remove('rooms-hidden'));
+          btn.style.display='none';
+        });
+      }
+    }else throw new Error('no rooms');
+  }catch(e){
+    roomsEl.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:1.5rem 0">
+      <a href="https://tryhackme.com/p/${THM_USER}" target="_blank" style="color:var(--accent);font-weight:600;font-size:.88rem">
+        View all completed rooms at tryhackme.com/p/${THM_USER} →
+      </a>
+    </div>`;
+  }
+}
+
+/* ── INIT ────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded',()=>{
+  fetchRepoCount();
+  fetchPinned();
+  fetchTHM();
+});
+</script>
 </body>
 </html>
