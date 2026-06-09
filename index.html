@@ -166,6 +166,22 @@ section{padding:5.5rem 1.5rem}
   letter-spacing:-.03em;line-height:1;
   margin-bottom:.85rem;
 }
+.hero-photo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1.5rem;
+  border: 3px solid rgba(255,255,255,0.22);
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.07);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
 .hero-tw-wrap{
   font-size:clamp(1rem,2.5vw,1.45rem);
   color:rgba(255,255,255,.8);margin-bottom:.65rem;
@@ -882,6 +898,8 @@ footer{
 ============================================================ -->
 <section id="hero">
   <div class="hero-inner">
+   <div class="hero-photo">
+     <img src="photo.jpeg" alt="Anik Adnan" /></div>
     <div class="hero-badge">ICT · AI · NLP · Cybersecurity</div>
     <h1 class="hero-name">ANIK ADNAN</h1>
     <div class="hero-tw-wrap">
