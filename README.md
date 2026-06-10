@@ -1,8 +1,7 @@
 # Anik Adnan — Portfolio
 
 [![Live](https://img.shields.io/badge/Live-anik--adnan.github.io-0A2540?style=flat-square&logo=github)](https://anik-adnan.github.io)
-[![HTML](https://img.shields.io/badge/HTML-Single--File-1B4F8A?style=flat-square&logo=html5)](index.html)
-[![License](https://img.shields.io/badge/License-MIT-697684?style=flat-square)](LICENSE)
+
 
 Personal portfolio of **Anik Adnan** — ICT Instructor · AI/ML/NLP Researcher · MSc Student at MBSTU, Bangladesh.
 
