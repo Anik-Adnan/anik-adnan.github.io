@@ -1696,7 +1696,7 @@ function buildRepoCard(repo, dark=true){
   const card=document.createElement('div');
   card.className='repo-card';
   const topics=(repo.repositoryTopics?.nodes||[]).slice(0,3).map(t=>t.topic.name);
-  const url=repo.url||repo.html_url||'#';
+  const url=repo.html_url||repo.svn_url||'#';
   const lang=repo.primaryLanguage||null;
   const langName=lang?(lang.name||repo.language||''):(repo.language||'');
   const langColor=lang?(lang.color||'#aaa'):'#aaa';
