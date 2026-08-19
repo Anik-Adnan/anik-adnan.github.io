@@ -805,8 +805,8 @@ a.pill:hover{background:var(--accent);color:#fff}
 
 #references{background:#fff}
 .ref-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1.5rem;max-width:820px;margin:0 auto;
+  display:flex;flex-direction:column;
+  gap:1.25rem;max-width:680px;margin:0 auto;
 }
 .ref-card{
   background:var(--bg);border-radius:var(--radius);
@@ -820,7 +820,9 @@ a.pill:hover{background:var(--accent);color:#fff}
   font-weight:700;color:var(--primary);
   font-size:1.05rem;margin-bottom:.4rem;
 }
-.ref-role{font-size:.85rem;color:var(--text-light);line-height:1.6;margin-bottom:.6rem}
+.ref-role{font-size:.85rem;line-height:1.6;margin-bottom:.6rem}
+.ref-dept{color:var(--accent);font-weight:600;display:block}
+.ref-uni{color:var(--subtle);display:block;margin-top:.15rem}
 .ref-detail{
   font-size:.83rem;color:var(--text-light);
   display:flex;align-items:center;gap:.4rem;margin-bottom:.3rem;
@@ -1632,13 +1634,19 @@ footer{
     <div class="ref-grid">
       <div class="ref-card fi">
         <div class="ref-name">Dr. Mohammad Badrul Alam Miah</div>
-        <div class="ref-role">Professor, Department of Information and Communication Technology(ICT)<br/>Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</div>
+        <div class="ref-role">
+          <span class="ref-dept">Professor, Department of Information and Communication Technology (ICT)</span>
+          <span class="ref-uni">Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</span>
+        </div>
         <div class="ref-detail">✉️ <a href="mailto:badrul.ict@gmail.com">badrul.ict@gmail.com</a></div>
         <!-- <div class="ref-detail">📞 <a href="tel:+8801712796569">+880 1712 796 569</a></div> -->
       </div>
       <div class="ref-card fi">
         <div class="ref-name">Dr. Monir Morshed</div>
-        <div class="ref-role">Professor, Department of Information and Communication Technology(ICT)<br/>Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</div>
+        <div class="ref-role">
+          <span class="ref-dept">Professor, Department of Information and Communication Technology (ICT)</span>
+          <span class="ref-uni">Mawlana Bhashani Science and Technology University, Santosh, Tangail-1902</span>
+        </div>
         <div class="ref-detail">✉️ <a href="mailto:monirmorshed.ict@mbstu.ac.bd">monirmorshed.ict@mbstu.ac.bd</a></div>
         <!-- <div class="ref-detail">📞 <a href="tel:+8801793667714">+880 1793 667 714</a></div> -->
       </div>
