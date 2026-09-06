@@ -662,6 +662,10 @@ section{padding:5.5rem 1.5rem}
 ============================================================ */
 #skills{background:#fff}
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.comp-card{text-decoration:none;text-align:center}
+.comp-card .skill-cat-title{border-bottom:none;padding-bottom:0;margin-bottom:.4rem}
+.comp-card .pill-wrap{justify-content:center}
 .skill-cat{
   background:var(--bg);border-radius:var(--radius);
   padding:1.2rem;box-shadow:var(--shadow);
@@ -879,6 +883,7 @@ footer{
   .about-grid{grid-template-columns:1fr}
   .proj-grid{grid-template-columns:1fr}
   .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .comp-grid{grid-template-columns:repeat(2,1fr)}
   .repos-grid,.all-repos-grid{grid-template-columns:1fr}
   .thm-rooms-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
@@ -888,6 +893,7 @@ footer{
 }
 @media(max-width:480px){
   .skills-grid{grid-template-columns:1fr}
+  .comp-grid{grid-template-columns:1fr}
   .cert-tabs{flex-direction:column;align-items:stretch}
   .cert-tab{text-align:center}
 }
@@ -1451,22 +1457,22 @@ footer{
       <h2 class="sec-title">Competitive Programming</h2>
       <div class="sec-rule"></div>
     </div>
-    <div class="skills-grid" style="grid-template-columns:repeat(4,1fr)">
-      <a href="https://codeforces.com/profile/Anik_Adnan" target="_blank" class="skill-cat fi" style="text-decoration:none;text-align:center">
-        <div class="skill-cat-title" style="border-bottom:none;padding-bottom:0;margin-bottom:.4rem">Codeforces</div>
-        <div class="pill-wrap" style="justify-content:center"><span class="pill">View Profile →</span></div>
+    <div class="comp-grid">
+      <a href="https://codeforces.com/profile/Anik_Adnan" target="_blank" class="skill-cat comp-card fi">
+        <div class="skill-cat-title">Codeforces</div>
+        <div class="pill-wrap"><span class="pill">View Profile →</span></div>
       </a>
-      <a href="https://uhunt.onlinejudge.org/id/1126199" target="_blank" class="skill-cat fi" style="text-decoration:none;text-align:center">
-        <div class="skill-cat-title" style="border-bottom:none;padding-bottom:0;margin-bottom:.4rem">UVA Online Judge</div>
-        <div class="pill-wrap" style="justify-content:center"><span class="pill">View Profile →</span></div>
+      <a href="https://uhunt.onlinejudge.org/id/1126199" target="_blank" class="skill-cat comp-card fi">
+        <div class="skill-cat-title">UVA Online Judge</div>
+        <div class="pill-wrap"><span class="pill">View Profile →</span></div>
       </a>
-      <a href="https://www.hackerrank.com/profile/anikadnanict17" target="_blank" class="skill-cat fi" style="text-decoration:none;text-align:center">
-        <div class="skill-cat-title" style="border-bottom:none;padding-bottom:0;margin-bottom:.4rem">HackerRank</div>
-        <div class="pill-wrap" style="justify-content:center"><span class="pill">View Profile →</span></div>
+      <a href="https://www.hackerrank.com/profile/anikadnanict17" target="_blank" class="skill-cat comp-card fi">
+        <div class="skill-cat-title">HackerRank</div>
+        <div class="pill-wrap"><span class="pill">View Profile →</span></div>
       </a>
-      <a href="https://leetcode.com/u/Anik_Adnan/" target="_blank" class="skill-cat fi" style="text-decoration:none;text-align:center">
-        <div class="skill-cat-title" style="border-bottom:none;padding-bottom:0;margin-bottom:.4rem">LeetCode</div>
-        <div class="pill-wrap" style="justify-content:center"><span class="pill">View Profile →</span></div>
+      <a href="https://leetcode.com/u/Anik_Adnan/" target="_blank" class="skill-cat comp-card fi">
+        <div class="skill-cat-title">LeetCode</div>
+        <div class="pill-wrap"><span class="pill">View Profile →</span></div>
       </a>
     </div>
   </div>
