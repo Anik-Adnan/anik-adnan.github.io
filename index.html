@@ -719,6 +719,19 @@ a.pill:hover{background:var(--accent);color:#fff}
 .cert-issuer{font-size:.78rem;color:var(--accent);font-weight:600}
 .cert-date{font-size:.75rem;color:var(--subtle);font-weight:600}
 .cert-desc{font-size:.78rem;color:var(--text-light);line-height:1.5}
+.cert-credential-id{font-size:.73rem;color:var(--subtle);word-break:break-all}
+.cert-credential-id code{background:rgba(27,79,138,.07);padding:.05rem .35rem;border-radius:3px;font-family:monospace;color:var(--accent)}
+.cert-view-btn{
+  margin-top:auto;display:inline-flex;align-items:center;gap:.35rem;
+  color:var(--accent);font-size:.78rem;font-weight:700;
+  padding:.4rem .85rem;border:2px solid rgba(27,79,138,.2);
+  border-radius:8px;transition:var(--tr);align-self:flex-start;
+}
+.cert-view-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.cert-view-btn.no-url{
+  color:var(--subtle);border-color:var(--border);cursor:default;
+}
+.cert-view-btn.no-url:hover{background:none;color:var(--subtle);border-color:var(--border)}
 
 /* ============================================================
    LEADERSHIP
@@ -1456,86 +1469,106 @@ footer{
     </div>
     <!-- Tab 0: Cybersecurity -->
     <div class="cert-panel active" id="cert-panel-0">
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+      <div class="cert-card fi">
         <div class="cert-badge">GGL</div>
         <div class="cert-name">Google Cybersecurity Professional Certificate</div>
         <div class="cert-issuer">Coursera</div>
         <div class="cert-date">August 2025</div>
         <div class="cert-desc">8-course specialization covering Python scripting, Linux, SQL, SIEM tools, and Intrusion Detection Systems; risk identification and mitigation.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">IBM</div>
         <div class="cert-name">IBM Ethical Hacking with Open Source Tools Specialization</div>
         <div class="cert-issuer">Coursera</div>
         <div class="cert-date">August 2025</div>
         <div class="cert-desc">Penetration testing and vulnerability assessment using Kali Linux, Wireshark, Metasploit, and OpenVAS.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">MSF</div>
         <div class="cert-name">Copilot for Cybersecurity</div>
         <div class="cert-issuer">Microsoft via Coursera</div>
         <div class="cert-date">July 2025</div>
         <div class="cert-desc">AI-driven copilot workflows for threat detection automation and security posture management.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">IBM</div>
         <div class="cert-name">Cybersecurity Assessment: CompTIA Security+ &amp; CySA+</div>
         <div class="cert-issuer">IBM via Coursera</div>
         <div class="cert-date">July 2025</div>
         <div class="cert-desc">Incident response, vulnerability metrics, and tactical assessment aligned with CompTIA industry baselines.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">PKT</div>
         <div class="cert-name">Nmap for Penetration Testing: Beginner to Advanced</div>
         <div class="cert-issuer">Packt via Coursera</div>
         <div class="cert-date">August 2025</div>
         <div class="cert-desc">Network discovery, port scanning, firewall evasion, and NSE scripting techniques.</div>
-      </a>
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
     </div>
     <!-- Tab 1: Software Dev -->
     <div class="cert-panel" id="cert-panel-1">
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+      <div class="cert-card fi">
         <div class="cert-badge">upG</div>
         <div class="cert-name">Learn Python Libraries: NumPy, Matplotlib &amp; Pandas</div>
         <div class="cert-issuer">upGrad</div>
         <div class="cert-date">December 2025</div>
         <div class="cert-desc">Hands-on training in NumPy array operations, Matplotlib data visualisation, and Pandas data manipulation for scientific computing workflows.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">ICT</div>
         <div class="cert-name">Python (Django) Professional Training</div>
         <div class="cert-issuer">Dept. of ICT, MBSTU / Bangladesh Computer Council EDGE Project</div>
         <div class="cert-date">July 2025</div>
         <div class="cert-desc">80-hour intensive full-stack web development programme (Jun–Dec 2024) specialising in Python and the Django framework.</div>
-      </a>
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
     </div>
     <!-- Tab 2: Fundamentals -->
     <div class="cert-panel" id="cert-panel-2">
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+      <div class="cert-card fi">
         <div class="cert-badge">NLP</div>
         <div class="cert-name">Introduction to Natural Language Processing</div>
         <div class="cert-issuer">Online Certification</div>
         <div class="cert-date">—</div>
         <div class="cert-desc">Foundations of NLP: tokenisation, language models, text classification, and sequence-to-sequence tasks.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">PY</div>
         <div class="cert-name">Python for Beginners</div>
         <div class="cert-issuer">Online Certification</div>
         <div class="cert-date">—</div>
         <div class="cert-desc">Core Python syntax, data structures, control flow, functions, and introductory object-oriented programming.</div>
-      </a>
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
         <div class="cert-badge">DSA</div>
         <div class="cert-name">Data Structures &amp; Algorithms</div>
         <div class="cert-issuer">Online Certification</div>
         <div class="cert-date">—</div>
         <div class="cert-desc">Arrays, linked lists, trees, graphs, sorting/searching algorithms, and complexity analysis.</div>
-      </a>
+        <!-- No official credential URL yet — replace with your Google Drive share link once uploaded -->
+        <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
     </div>
      <!-- Tab 3: AI & Machine Learning -->
     <div class="cert-panel" id="cert-panel-3">
-      <a href="https://www.linkedin.com/in/anikadnan9/details/certifications/" target="_blank" class="cert-card fi">
+      <div class="cert-card fi">
         <div class="cert-badge">GLA</div>
         <div class="cert-name">30-Day Machine Learning Internship</div>
         <div class="cert-issuer">Gobeshona Learning Academy</div>
@@ -1546,7 +1579,23 @@ footer{
           Covered regression (single &amp; multiple variable, R²/adjusted R²), unsupervised learning (K-Means &amp; hierarchical clustering, Apriori market basket analysis), and reinforcement learning (Upper Confidence Bound).
           Applied OpenCV for image processing, built neural networks for image classification, used deep learning for speech recognition, and finished with an LLM-based real/fake news detection project.
         </div>
-      </a>
+        <a href="https://my-certificates.com/certificates/6a4a3fb381683ab63964e9be" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
+      <div class="cert-card fi">
+        <div class="cert-badge">GLA</div>
+        <div class="cert-name">30 Days Internship on Artificial Intelligence</div>
+        <div class="cert-issuer">Gobeshona Learning Academy</div>
+        <div class="cert-date">September 06, 2026</div>
+        <div class="cert-desc">
+          Full-spectrum, day-by-day AI internship spanning five tracks. <strong>Introduction to AI:</strong> Dialogflow fundamentals and building a custom chatbot.
+          <strong>Machine Learning:</strong> Python for AI (NumPy, Pandas, Matplotlib, Scikit-learn), linear algebra &amp; calculus, supervised models (Logistic Regression, Decision Tree, Random Forest) applied to house-price prediction, unsupervised learning (clustering, dimensionality reduction, association rule mining), and model evaluation (confusion matrix, precision, recall, F1-score).
+          <strong>Computer Vision:</strong> OpenCV, Ultralytics, Darknet, YOLOv5/YOLOv8, camera calibration, and face detection, recognition, emotion recognition, and colour-based object tracking.
+          <strong>Deep Learning:</strong> TensorFlow &amp; Keras neural network design, pre-trained object recognition, CNN image classification, and applied projects — hand-gesture, leaf-disease, attendance (face recognition), vehicle, drowsiness, speech, and road-sign recognition, plus an AI Snake Game built with reinforcement learning.
+          <strong>NLP:</strong> tokenisation, Word2Vec, stemming, TF-IDF, text summarisation, sentiment analysis, BERT-based real/fake news detection, LSTM next-word prediction, paragraph-to-title generation, GANs, and OMR sheet processing.
+        </div>
+        <div class="cert-credential-id">Credential ID: <code>6a9d1dbddf30fc41b2ca3bdb</code></div>
+        <a href="https://my-certificates.com/certificates/6a9d1dbddf30fc41b2ca3bdb" target="_blank" class="cert-view-btn">View Credential →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1615,6 +1664,7 @@ footer{
             <span class="tl-year">2024</span>
           </div>
           <p class="lead-desc">Supported operational delivery of the EDGE Activation Programme, contributing to training logistics, participant onboarding, and the certificate giving ceremony.</p>
+          <a href="https://drive.google.com/file/d/1dI1z9iSbUt0n4QBDqSzcZHE0T0zzubtz/view?usp=drive_link" target="_blank" class="cert-view-btn" style="margin-top:.7rem">View Certificate →</a>
         </div>
       </div>
     </div>
